@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 
 class Header extends Component {
+
+    inputChange(event){
+        console.log('changed');
+        console.log(event.target.value);
+    }
+
     render(){
         return (
             <header>
-                <div className="logo">Header</div>
-                <input/>
+                <div className="logo" onClick={()=> console.log('i was clicked')}>Header</div>
+                <input
+                    onChange={(event) => this.inputChange(event)}
+                />
             </header>
         )
     }
