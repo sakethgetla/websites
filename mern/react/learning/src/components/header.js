@@ -2,9 +2,23 @@ import React, { Component } from 'react';
 
 class Header extends Component {
 
+    state = {
+        title:'title',
+        inputs:'',
+        count:0
+    }
     inputChange(event){
         console.log('changed');
         console.log(event.target.value);
+        this.setState({
+            inputs: event.target.value
+        })
+    }
+    addOne(){
+        this.setState((state, props) => ({
+            count: state.count +1
+        }))
+        console.log('add one');
     }
 
     render(){
@@ -14,6 +28,11 @@ class Header extends Component {
                 <input
                     onChange={(event) => this.inputChange(event)}
                 />
+                <div>inputs are: {this.state.inputs}</div>
+                <br/>
+                <div onClick = {()=> this.addOne()}> +=1 </div>
+                <div>{this.state.count}</div>
+
             </header>
         )
     }
