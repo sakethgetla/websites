@@ -2,6 +2,9 @@
 import React from 'react';
 
 const NewsListItem = (props) => {
+    console.log('props')
+    console.log(props)
+
     return (
         <>
             <h3> 

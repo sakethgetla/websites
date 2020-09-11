@@ -8,8 +8,8 @@ const NewsList = (props) => {
     //console.log(news)
     console.log(props)
     
-    const news = props.news.map((nn)=>(
-        <NewsListItem item={ nn } key={nn.id}/>
+    const news = props.news.map((nn, i)=>(
+        <NewsListItem item={ nn } key={i}/>
     ))
 
     return (

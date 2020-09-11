@@ -8,11 +8,12 @@ class Header extends Component {
         count:0
     }
     inputChange(event){
-        console.log('changed');
-        console.log(event.target.value);
+        //console.log('changed');
+        //console.log(event.target.value);
         this.setState({
             inputs: event.target.value
         })
+        this.props.getInputs(event)
     }
     addOne(){
         this.setState((state, props) => ({
@@ -24,7 +25,7 @@ class Header extends Component {
     render(){
         return (
             <header>
-                <div className="logo" onClick={()=> console.log('i was clicked')}>Header</div>
+                <div className="logo" onClick={(event)=> console.log('i was clicked')}>Header</div>
                 <input
                     onChange={(event) => this.inputChange(event)}
                 />
