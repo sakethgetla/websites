@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Banner from './banner';
 
+import ArtistsList from './artistsList';
+
 const URL_ARTISTS = 'http://localhost:3004/artists'
 
 class Home extends Component {
@@ -19,6 +21,7 @@ class Home extends Component {
             <>
                 <Banner/>
                 Home
+                <ArtistsList allArtsits={this.state.artists}/>
             </>
         )
     }

@@ -1,9 +1,15 @@
 
+@font-face {
+  font-family: Monoton;
+  src: url('../Monoton-Regular.ttf');
+}
 
 body{
     margin:0;
     font-family:"Roboto";
     background: #eaeaea;
+
+    /*text-align: center;*/
 }
 
 a {
