@@ -5,8 +5,6 @@ const Banner = () => (
         <div className="main_cover">
             <div className="logo">YOUR MUSIC</div>
         </div>
-        <spam></spam>
-
     </div>
 )
         //<spam></spam>
