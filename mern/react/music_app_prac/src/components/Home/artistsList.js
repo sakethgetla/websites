@@ -1,9 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Route , Link, Switch} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+//const ArtistsList = (props) => {
+//    console.log(props);
+//    return (
+//        <>
+//            adkj
+//        </>
+//    )
+//}
 
 const ArtistsList = ({allArtsits}) => {
     const list = (values) => (
-
         values ?
             values.map(artist => (
                 <Link 
