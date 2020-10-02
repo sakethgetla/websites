@@ -15,12 +15,42 @@ const HomeArticles = () => {
   }, [])
 
   const genArticles = articles.map((article, i) => (
-    <div key={ i } className='row'>
+    <div
+      key={i}
+      className='block_item'
+    >
+      <div
+        style={{
+          background: `url(/images/blocks/${article.image}) no-repeat`
+        }}
+        className='block_image'
+      />
       {article.title}
     </div>
-  ));
+  ))
 
-  //console.log(articles);
+      //<div
+      //  key = {i}
+      //  className='block_image'
+      //  style={{
+      //    background: `url(/images/blocks/${article.image}) no-repeat`
+      //  }}
+      //>
+      //</div>
+    //<div key={ i } className='row'>
+    //  <div className="top">
+    //    <div className="veil"></div>
+    //    <div 
+    //      className='block_image'
+    //      style={{
+    //        background: `url(/images/blocks/${article.image}) no-repeat`
+    //      }}
+    //    >
+    //    </div>
+    //  </div>
+    //</div>
+
+  console.log(articles);
   return(
     <>
       {genArticles}
