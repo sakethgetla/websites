@@ -10,7 +10,7 @@ const Artist = (props) => {
     const [artist, setArtist] = useState('');
 
     useEffect(() => {
-        axios.get(URL_ARTISTS + '/' + props.match.params.artistId).then( response => {
+
             console.log(response.data)
             setArtist(response.data)
         })

@@ -12,7 +12,6 @@ class Home extends Component {
     return(
       <>
         <Slider/>
-        HOme
         <Subscribe/>
         <HomeArticles/>
       </>

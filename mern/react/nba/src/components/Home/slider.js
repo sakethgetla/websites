@@ -5,8 +5,8 @@ import { URL_SLIDES } from '../utils/paths';
 import axios from 'axios';
 
 const settings = {
-  arrows: false,
-  dots: false,
+  arrows: true,
+  dots: true,
   infinite: true,
   speed: 500,
   slidesToShow: 1,
@@ -54,4 +54,3 @@ const MySlider = () => {
   )
 }
 export default MySlider;
-
