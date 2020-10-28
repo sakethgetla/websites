@@ -1,3 +1,4 @@
+import {MOVIES_LIST} from '../types'
 //import { combineReducers } from 'redux';
 
 //const data = {
@@ -9,7 +10,7 @@
 
 export default function (state = [], action){
     switch(action.type){
-        case 'moviesList':
+        case MOVIES_LIST:
             return action.payload;
         default :
             return state;
