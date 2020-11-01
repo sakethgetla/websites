@@ -1,10 +1,15 @@
 const express = require('express');
 const app = express();
 
-app.get('/api/user', function(req, res){
-    res.send({
+app.get('/api/:user', function(req, res){
+    // http://localhost:3000/api/sam?year=1000
+    // if i type the above in a browse
+    let user = req.params.user;
+    let year = req.query.year;
 
-        name: 'john doe'
+    res.send({
+        name: user,
+        year: year
     })
 })
 app.get('/', function(req, res){
