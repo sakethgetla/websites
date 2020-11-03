@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const app = express();
 
 app.use(bodyParser.json())
@@ -16,14 +17,35 @@ app.get('/api/:user', function(req, res){
     })
 })
 
+mongoose.connect( 'mongodb://localhost:27017/App', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+
+// create schema
+const carSchema = mongoose.Schema({
+    brand: String,
+    model: String,
+    year: Number
+})
+
+const Car = mongoose.model('Car', carSchema)
+
 app.get('/api/addCar', function(req, res){
     console.log('get, addcar')
 })
 
 
 app.post('/api/addCar', function(req, res){
-    console.log(req.body)
-    console.log('post addcar')
+    const addcar = new Car({
+        brand: req.body.brand,
+        model: req.body.model,
+        year: req.body.year
+    })
+    addcar.save((err, doc)=>{
+        if (err) return console.log(err)
+        console.log(doc)
+    })
 })
 
 
