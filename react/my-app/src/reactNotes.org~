@@ -1,0 +1,3 @@
+
+in js classes that call the constructor should call 'super'.
+eg. super(props)
