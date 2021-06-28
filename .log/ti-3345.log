@@ -1,0 +1,40 @@
+[08:00:27.308] Global cache location '/home/dawes/.cache/typescript/4.2', safe file path '/usr/lib/node_modules/typescript/lib/typingSafeList.json', types map path /usr/lib/node_modules/typescript/lib/typesMap.json
+[08:00:27.309] Processing cache location '/home/dawes/.cache/typescript/4.2'
+[08:00:27.309] Trying to find '/home/dawes/.cache/typescript/4.2/package.json'...
+[08:00:27.310] Loaded content of '/home/dawes/.cache/typescript/4.2/package.json': {"private":true,"dependencies":{"types-registry":"^0.1.540"},"devDependencies":{"@types/object-assign":"^4.0.30","@types/react":"^17.0.5"}}
+[08:00:27.310] Loaded content of '/home/dawes/.cache/typescript/4.2/package-lock.json'
+[08:00:27.323] Adding entry into typings cache: 'object-assign' => '/home/dawes/.cache/typescript/4.2/node_modules/@types/object-assign/index.d.ts'
+[08:00:27.334] Adding entry into typings cache: 'react' => '/home/dawes/.cache/typescript/4.2/node_modules/@types/react/index.d.ts'
+[08:00:27.334] Finished processing cache location '/home/dawes/.cache/typescript/4.2'
+[08:00:27.335] Process id: 3352
+[08:00:27.335] NPM location: /usr/bin/npm (explicit '--npmLocation' not  provided)
+[08:00:27.335] validateDefaultNpmLocation: false
+[08:00:27.335] Npm config file: /home/dawes/.cache/typescript/4.2/package.json
+[08:00:27.335] Updating types-registry npm package...
+[08:00:27.335] Exec: /usr/bin/npm install --ignore-scripts types-registry@latest
+[08:00:28.188]     Succeeded. stdout:
+    
+    up to date, audited 7 packages in 718ms
+
+found 0 vulnerabilities
+
+[08:00:28.189] Updated types-registry npm package
+[08:00:31.186] Got install request {"projectName":"/dev/null/inferredProject1*","fileNames":["/usr/lib/node_modules/typescript/lib/lib.es5.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2015.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2016.d.ts","/usr/lib/node_modules/typescript/lib/lib.dom.d.ts","/usr/lib/node_modules/typescript/lib/lib.dom.iterable.d.ts","/usr/lib/node_modules/typescript/lib/lib.webworker.importscripts.d.ts","/usr/lib/node_modules/typescript/lib/lib.scripthost.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2015.core.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2015.generator.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2015.iterable.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2015.promise.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2015.proxy.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2015.reflect.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2015.symbol.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2016.array.include.d.ts","/usr/lib/node_modules/typescript/lib/lib.es2016.full.d.ts","/home/dawes/docs/websites/react/my-app/src/components/MainContent.js","/home/dawes/docs/websites/react/my-app/src/App.js"],"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typeAcquisition":{"enable":true,"include":[],"exclude":[]},"unresolvedImports":[],"projectRootPath":"/home/dawes/docs/websites/react/my-app/src","kind":"discover"}
+[08:00:31.209] Loaded safelist from types map file '/usr/lib/node_modules/typescript/lib/typesMap.json'
+[08:00:31.210] Explicitly included types: []
+[08:00:31.211] Inferred typings from unresolved imports: []
+[08:00:31.212] Result: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/home/dawes/docs/websites/react/my-app/src/components/bower_components","/home/dawes/docs/websites/react/my-app/src/components/node_modules","/home/dawes/docs/websites/react/my-app/src/bower_components","/home/dawes/docs/websites/react/my-app/src/node_modules"]}
+[08:00:31.212] Finished typings discovery: {"cachedTypingPaths":[],"newTypingNames":[],"filesToWatch":["/home/dawes/docs/websites/react/my-app/src/components/bower_components","/home/dawes/docs/websites/react/my-app/src/components/node_modules","/home/dawes/docs/websites/react/my-app/src/bower_components","/home/dawes/docs/websites/react/my-app/src/node_modules"]}
+[08:00:31.212] DirectoryWatcher:: Added:: WatchInfo: /home/dawes/docs/websites/react/my-app/src/components
+[08:00:31.212] DirectoryWatcher:: Added:: WatchInfo: /home/dawes/docs/websites/react/my-app/src/components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[08:00:31.214] Elapsed:: 1.4132150001823902ms DirectoryWatcher:: Added:: WatchInfo: /home/dawes/docs/websites/react/my-app/src/components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[08:00:31.214] DirectoryWatcher:: Added:: WatchInfo: /home/dawes/docs/websites/react/my-app/src/bower_components
+[08:00:31.214] DirectoryWatcher:: Added:: WatchInfo: /home/dawes/docs/websites/react/my-app/src/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[08:00:31.215] Elapsed:: 0.707442999817431ms DirectoryWatcher:: Added:: WatchInfo: /home/dawes/docs/websites/react/my-app/src/bower_components 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[08:00:31.215] DirectoryWatcher:: Added:: WatchInfo: /home/dawes/docs/websites/react/my-app/src/node_modules
+[08:00:31.215] DirectoryWatcher:: Added:: WatchInfo: /home/dawes/docs/websites/react/my-app/src/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[08:00:31.215] Elapsed:: 0.11108999978750944ms DirectoryWatcher:: Added:: WatchInfo: /home/dawes/docs/websites/react/my-app/src/node_modules 1 undefined Project: /dev/null/inferredProject1* watcher already invoked: false
+[08:00:31.215] Sending response:
+    {"projectName":"/dev/null/inferredProject1*","typeAcquisition":{"enable":true,"include":[],"exclude":[]},"compilerOptions":{"module":1,"target":3,"jsx":1,"allowJs":true,"allowSyntheticDefaultImports":true,"allowNonTsExtensions":true,"noEmitForJsFiles":true,"maxNodeModuleJsDepth":2},"typings":[],"unresolvedImports":[],"kind":"action::set"}
+[08:00:31.216] Response has been sent.
+[08:00:31.216] No new typings were requested as a result of typings discovery

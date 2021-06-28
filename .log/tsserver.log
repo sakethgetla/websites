@@ -1,0 +1,19 @@
+Info 0    [19:31:18.144] Starting TS Server
+Info 1    [19:31:18.144] Version: 4.2.4
+Info 2    [19:31:18.144] Arguments: /usr/bin/node /usr/bin/tsserver --logFile /home/dawes/docs/websites/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/233b1c23c0650304edcffe55ac194501/tscancellation*
+Info 3    [19:31:18.144] Platform: linux NodeVersion: 16 CaseSensitive: true
+Info 4    [19:31:18.144] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
+Info 5    [19:31:18.163] Search path: /home/dawes/docs/websites/old/final_website/server
+Info 6    [19:31:18.164] For info: /home/dawes/docs/websites/old/final_website/server/server.js :: No config files found.
+Info 7    [19:31:18.168] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 8    [19:31:21.209] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true Elapsed: 3040.1676420001313ms
+Info 9    [19:31:21.209] Project '/dev/null/inferredProject1*' (Inferred)
+Info 10   [19:31:21.209] 	Files (142)
+
+Info 11   [19:31:21.209] -----------------------------------------------
+Info 12   [19:31:21.261] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject1*
+Info 13   [19:31:21.299] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject1* Version: 1 structureChanged: true Elapsed: 37.74778399989009ms
+Info 14   [19:31:21.299] Project '/dev/null/autoImportProviderProject1*' (AutoImportProvider)
+Info 15   [19:31:21.299] 	Files (9)
+
+Info 16   [19:31:21.299] -----------------------------------------------

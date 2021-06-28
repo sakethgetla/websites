@@ -1,5 +1,4 @@
 import React from 'react';
-
 import MainContent from './components/MainContent';
 
 class Board extends React.Component {
@@ -12,8 +11,8 @@ class Board extends React.Component {
     }
     renderSquare(i) {
         return (<Square
-                 value={this.state.squares[i]}
-                 onClick={() => this.handleClick(i)}/>
+		    value={this.state.squares[i]}
+		    onClick={() => this.handleClick(i)}/>
                );
     }
     handleClick(i){
@@ -30,6 +29,7 @@ class Board extends React.Component {
         //this.setState({squares: squares, xNext: !this.state.xNext});
         
     }
+
     render() {
 	//const status = null;
 	let status ;
@@ -43,7 +43,10 @@ class Board extends React.Component {
 	    <div>
 		<div className="status">{status}</div>
 		<div className="board-row">
-                  <Square value={0}/>
+                  {// <Square value={0}/>
+		  }
+                  {/* <Square value={0}/> */}
+		    {this.renderSquare(0)}
 		    {this.renderSquare(1)}
 		    {this.renderSquare(2)}
 		</div>

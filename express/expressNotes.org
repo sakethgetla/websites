@@ -1,0 +1,11 @@
+Express js
+
+framework used to create servers and clients with js.
+
+use to post via terminal
+    $ curl -X POST "http://localhost:3000/hello"
+
+used for middleware
+    runs for all types of http methods at path
+    $ app.all(path, handler function)
+
