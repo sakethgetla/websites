@@ -1,4 +1,14 @@
 
+
+
+|---------------------------------------------------+---------------------|
+| COMMAND                                           | INFO                |
+|---------------------------------------------------+---------------------|
+| npx create-react-app my-app --template typescript | create ts react app |
+|                                                   |                     |
+|---------------------------------------------------+---------------------|
+
+
 in js classes that call the constructor should call 'super'.
   eg. super(props)
 
