@@ -16,3 +16,15 @@ app.get("/", (req, res) => {
   res.send('get it');
   console.log('got get req');
 })
+
+io.on('connection', (socket)=>{
+  console.log('connected');
+  socket.emit('me', socket.id);
+
+  socket.on('connectUser', data =>{
+    io.to(data.to).emit('connectUser', data.signal)
+  })
+
+})
+
+server.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
