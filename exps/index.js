@@ -21,8 +21,11 @@ io.on('connection', (socket)=>{
   console.log('connected');
   socket.emit('me', socket.id);
 
+  socket.on('replyUser', data =>{
+    io.to(data.to).emit('replyUser', {'signal': data.signal, 'from': socket.id})
+  })
   socket.on('connectUser', data =>{
-    io.to(data.to).emit('connectUser', data.signal)
+    io.to(data.to).emit('connectUser', {'signal': data.signal, 'from': socket.id})
   })
 
 })
