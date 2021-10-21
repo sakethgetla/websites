@@ -5,7 +5,9 @@ import Matter from "matter-js";
 
 
 var particleSpeed = 3,
+    playerSpeed = 5,
   particleSize = 9,
+  playerSize = 18,
   sceneWidth = 600,
   sceneHeight = 600;
 
@@ -28,17 +30,24 @@ const createParticles = (num = 100) => {
     restitution: 1,
     friction: 0,
     frictionAir: 0,
+    label: 'particle',
+    render : {
+      fillStyle: '#e32e4a'
+    }
   };
 
   const player = Matter.Bodies.circle(
     // initial particle position
     Math.random() * sceneWidth,
     Math.random() * sceneHeight,
-    particleSize * 2,
-    {restitution: 1,
-     frictionAir: 0,
-     inertia: Infinity,
-     mass: 1}
+    playerSize,
+    {
+      restitution: 1,
+      frictionAir: 0,
+      inertia: Infinity,
+      isSensor: true,
+      mass: 1
+    }
 
     // particleOptions
   );
@@ -105,7 +114,7 @@ class Scene extends React.Component {
       }
     });
 
-    var { particles, player } = createParticles(50);
+    var { particles, player } = createParticles(20);
     this.setState({ player })
     let counter0 = 0;
     Matter.Events.on(engine, 'beforeUpdate', function(e) {
@@ -119,16 +128,44 @@ class Scene extends React.Component {
     });
 
     const node = this.refs.scene;
+
+    node.addEventListener('keyup', function(e) {
+      if (e.key === 'ArrowRight') {
+        Matter.Body.setVelocity(player, { x: 0, y: player.velocity.y })
+      }
+      if (e.key === 'ArrowLeft') {
+        Matter.Body.setVelocity(player, { x: 0, y: player.velocity.y })
+      }
+      if (e.key === 'ArrowDown') {
+        Matter.Body.setVelocity(player, { x: player.velocity.x, y: 0 })
+      }
+      if (e.key === 'ArrowUp') {
+        Matter.Body.setVelocity(player, { x: player.velocity.x, y: 0 })
+      }
+    });
+
+
     node.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') {
+        //console.log('kere');
+        Matter.Body.setVelocity(player, { x: playerSpeed, y: player.velocity.y })
+      }
+      if (e.key === 'ArrowLeft') {
+        Matter.Body.setVelocity(player, { x: -playerSpeed, y: player.velocity.y })
+      }
+      if (e.key === 'ArrowDown') {
+        Matter.Body.setVelocity(player, { x: player.velocity.x, y: playerSpeed })
+      }
 
       if (e.key === 'ArrowUp') {
 
-        player.force = {
-          x: 0,
-          y: 0.01
-        }
+        // player.force = {
+        //   x: 0,
+        //   y: 0.01
+        // }
 
-        Matter.Body.setAngularVelocity(player, 0.1 );
+        Matter.Body.setVelocity(player, { x: player.velocity.x, y: -playerSpeed })
+        //Matter.Body.setAngularVelocity(player, 0.1 );
         // Matter.Body.applyForce(player,
         //   {
         //     x: 0,
@@ -141,8 +178,58 @@ class Scene extends React.Component {
       }
     })
 
+
+    // an example of using collisionActive event on an engine
+    Matter.Events.on(engine, 'collisionStart', function(event) {
+      var pairs = event.pairs;
+
+      // change object colours to show those in an active collision (e.g. resting contact)
+
+
+      for (var i = 0; i < pairs.length; i++) {
+          var pair = pairs[i];
+
+        //console.log(pairs[i].bodyA.label);
+        if (player === pairs[i].bodyA && 'particle' === pairs[i].bodyB.label){
+          //pair.bodyB.render.visible = false;
+          Matter.Body.setPosition(pair.bodyB,
+                                  {x: Math.random() * sceneWidth,
+                                   y: Math.random() * sceneHeight});
+
+          // pair.bodyB.position = {x: Math.random() * sceneWidth,
+          //                          y: Math.random() * sceneHeight};
+
+        }else if(player === pairs[i].bodyB && 'particle' == pairs[i].bodyA.label) {
+          //pair.bodyA.render.visible = false;
+          //pair.bodyB.render.fillStyle = '#333';
+          // pair.bodyA.position = {x: Math.random() * sceneWidth,
+          //                          y: Math.random() * sceneHeight};
+
+          Matter.Body.setPosition(pair.bodyA,
+                                  {x: Math.random() * sceneWidth,
+                                   y: Math.random() * sceneHeight});
+
+        }
+      }
+
+      player.render.visible = true;
+    });
+
+    // an example of using beforeUpdate event on an engine
+    Matter.Events.on(engine, 'beforeUpdate', function(event) {
+        //var engine = event.source;
+
+        // apply random forces every 5 secs
+        if (event.timestamp % 5000 < 50){
+          particles[~~(Math.random()*10)].render.fillStyle = '#333';
+          console.log(particles.length);
+
+        }
+    });
+
+
     World.add(engine.world, drawWalls());
-    //World.add(engine.world, particles);
+    World.add(engine.world, particles);
     World.add(engine.world, [player]);
     Engine.run(engine);
     Render.run(render);
