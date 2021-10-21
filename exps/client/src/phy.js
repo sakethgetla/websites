@@ -5,7 +5,7 @@ import Matter from "matter-js";
 
 
 var particleSpeed = 3,
-    playerSpeed = 5,
+  playerSpeed = 5,
   particleSize = 9,
   playerSize = 18,
   sceneWidth = 600,
@@ -31,7 +31,7 @@ const createParticles = (num = 100) => {
     friction: 0,
     frictionAir: 0,
     label: 'particle',
-    render : {
+    render: {
       fillStyle: '#e32e4a'
     }
   };
@@ -187,27 +187,31 @@ class Scene extends React.Component {
 
 
       for (var i = 0; i < pairs.length; i++) {
-          var pair = pairs[i];
+        var pair = pairs[i];
 
         //console.log(pairs[i].bodyA.label);
-        if (player === pairs[i].bodyA && 'particle' === pairs[i].bodyB.label){
+        if (player === pairs[i].bodyA && 'particle' === pairs[i].bodyB.label) {
           //pair.bodyB.render.visible = false;
           Matter.Body.setPosition(pair.bodyB,
-                                  {x: Math.random() * sceneWidth,
-                                   y: Math.random() * sceneHeight});
+            {
+              x: Math.random() * sceneWidth,
+              y: Math.random() * sceneHeight
+            });
 
           // pair.bodyB.position = {x: Math.random() * sceneWidth,
           //                          y: Math.random() * sceneHeight};
 
-        }else if(player === pairs[i].bodyB && 'particle' == pairs[i].bodyA.label) {
+        } else if (player === pairs[i].bodyB && 'particle' === pairs[i].bodyA.label) {
           //pair.bodyA.render.visible = false;
           //pair.bodyB.render.fillStyle = '#333';
           // pair.bodyA.position = {x: Math.random() * sceneWidth,
           //                          y: Math.random() * sceneHeight};
 
           Matter.Body.setPosition(pair.bodyA,
-                                  {x: Math.random() * sceneWidth,
-                                   y: Math.random() * sceneHeight});
+            {
+              x: Math.random() * sceneWidth,
+              y: Math.random() * sceneHeight
+            });
 
         }
       }
@@ -217,14 +221,23 @@ class Scene extends React.Component {
 
     // an example of using beforeUpdate event on an engine
     Matter.Events.on(engine, 'beforeUpdate', function(event) {
-        //var engine = event.source;
+      //var engine = event.source;
 
-        // apply random forces every 5 secs
-        if (event.timestamp % 5000 < 50){
-          particles[~~(Math.random()*10)].render.fillStyle = '#333';
-          console.log(particles.length);
+      // apply random forces every 5 secs
+      if (event.timestamp % 5000 < 50) {
+        particles[~~(Math.random() * 10)].render.fillStyle = '#333';
+        //console.log(particles.length);
+      }
+      var collisions = Matter.Query.ray(particles, player.position,
+        { x: player.position.x, y: player.position.y - (2 * playerSize) });
 
-        }
+      for (var i = 0; i < collisions.length; i++) {
+        var collision = collisions[i];
+        console.log('kere');
+        collision.bodyA.render.fillStyle = '#85b41d';
+        //collision.bodyB.render.fillStyle = '#85b41d';
+        //collision.bodyB.fillStyle = 'Blue';
+      }
     });
 
 
