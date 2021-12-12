@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import * as tf from '@tensorflow/tfjs';
+import * as tf from '@tensorflow/tfjs';
 
 const Model = () => {
   const a = tf.tensor([1, 2, 3, 4]);

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Matter from "matter-js";
+//import { ifft } from "@tensorflow/tfjs";
 
 
 
@@ -9,6 +10,10 @@ var particleSpeed = 3,
   particleSize = 9,
   playerSize = 18,
   sceneWidth = 600,
+  infectedColor = '#333',
+  cleanColor = '#e32e4a',
+  numInfected = 0,
+  numClean = 0,
   sceneHeight = 600;
 
 const adjustE = function(p) {
@@ -24,6 +29,19 @@ const adjustE = function(p) {
   }
 };
 
+const updateStats = (particles) => {
+  numInfected = 0;
+  numClean = 0;
+  particles.forEach(p => {
+    if (p.render.fillStyle === infectedColor)
+      numInfected++;
+    else if (p.render.fillStyle === cleanColor)
+      numClean++;
+  });
+
+  //return { numClean, numInfected };
+};
+
 
 const createParticles = (num = 100) => {
   const particleOptions = {
@@ -32,7 +50,7 @@ const createParticles = (num = 100) => {
     frictionAir: 0,
     label: 'particle',
     render: {
-      fillStyle: '#e32e4a'
+      fillStyle: cleanColor,
     }
   };
 
@@ -45,7 +63,7 @@ const createParticles = (num = 100) => {
       restitution: 1,
       frictionAir: 0,
       inertia: Infinity,
-      isSensor: true,
+      //isSensor: true,
       mass: 1
     }
 
@@ -81,7 +99,7 @@ const createParticles = (num = 100) => {
 class Scene extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { player: null };
+    this.state = { player: null, numClean: 0, numInfected: 0 };
     this.myRef = React.createRef();
   }
 
@@ -108,6 +126,7 @@ class Scene extends React.Component {
         height: 600,
         wireframes: false,
         showAngleIndicator: true,
+
         background: 'transparent'
 
         //wireframeBackground: 'transparent'
@@ -115,8 +134,11 @@ class Scene extends React.Component {
     });
 
     var { particles, player } = createParticles(20);
+    updateStats(particles);
+        //console.log('kere');
     this.setState({ player })
     let counter0 = 0;
+
     Matter.Events.on(engine, 'beforeUpdate', function(e) {
       if (e.timestamp >= counter0 + 500) {
         particles.forEach(function(p) {
@@ -198,9 +220,12 @@ class Scene extends React.Component {
               y: Math.random() * sceneHeight
             });
 
+          pair.bodyB.render.fillStyle = cleanColor;
+
           // pair.bodyB.position = {x: Math.random() * sceneWidth,
           //                          y: Math.random() * sceneHeight};
 
+          updateStats(particles);
         } else if (player === pairs[i].bodyB && 'particle' === pairs[i].bodyA.label) {
           //pair.bodyA.render.visible = false;
           //pair.bodyB.render.fillStyle = '#333';
@@ -212,7 +237,9 @@ class Scene extends React.Component {
               x: Math.random() * sceneWidth,
               y: Math.random() * sceneHeight
             });
+          pair.bodyA.render.fillStyle = cleanColor;
 
+          updateStats(particles);
         }
       }
 
@@ -223,9 +250,9 @@ class Scene extends React.Component {
     Matter.Events.on(engine, 'beforeUpdate', function(event) {
       //var engine = event.source;
 
-      // apply random forces every 5 secs
+      // apply infection to random every 5 secs
       if (event.timestamp % 5000 < 50) {
-        particles[~~(Math.random() * 10)].render.fillStyle = '#333';
+        particles[~~(Math.random() * 10)].render.fillStyle = infectedColor;
         //console.log(particles.length);
       }
       var collisions = Matter.Query.ray(particles, player.position,
@@ -233,11 +260,51 @@ class Scene extends React.Component {
 
       for (var i = 0; i < collisions.length; i++) {
         var collision = collisions[i];
-        console.log('kere');
+        //console.log('kere');
         collision.bodyA.render.fillStyle = '#85b41d';
         //collision.bodyB.render.fillStyle = '#85b41d';
         //collision.bodyB.fillStyle = 'Blue';
       }
+      //this.setState({numClean: 8, numInfected: 9});
+      //console.log(numClean, numInfected);
+
+    })
+
+
+    Matter.Events.on(render, 'afterRender', function() {
+      var context = render.context,
+        //bodies = Composite.allBodies(engine.world),
+        startPoint = { x: 400, y: 100 },
+        endPoint = { x: 500, y: 200 };
+
+
+      var collisions = Matter.Query.ray(particles, startPoint, endPoint);
+
+      Render.startViewTransform(render);
+
+      context.beginPath();
+      context.moveTo(startPoint.x, startPoint.y);
+      context.lineTo(endPoint.x, endPoint.y);
+      if (collisions.length > 0) {
+        context.strokeStyle = '#fff';
+      } else {
+        context.strokeStyle = '#555';
+      }
+
+
+      context.lineWidth = 0.5;
+      context.stroke();
+
+      for (var i = 0; i < collisions.length; i++) {
+        var collision = collisions[i];
+        context.rect(collision.bodyA.position.x - 4.5, collision.bodyA.position.y - 4.5, 8, 8);
+      }
+
+      context.fillStyle = 'rgba(255,165,0,0.7)';
+      context.fill();
+
+      Render.endViewTransform(render);
+
     });
 
 
@@ -262,8 +329,15 @@ class Scene extends React.Component {
     //   Matter.Body.applyForce(player,player.position,{x:force,y:0});
     // }
 
-    return <div ref="scene"
-      tabIndex="0" />
+    return (
+      <>
+        <div ref="scene" tabIndex="0" />
+        <h1>
+          num infected: {numInfected}
+          num clean: {numClean}
+        </h1>
+      </>
+    );
 
   };
 }
