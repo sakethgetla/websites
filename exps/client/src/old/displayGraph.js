@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-//import Astar from './astar';
+import Astar from './astar';
 import Vertex from './vertex';
 import { Container, Row, Col } from 'react-grid-system';
 
-const DisplayGraph = () => {
+const DisplayGraph = (props) => {
   function t() {
     const numNodes = 10;
     const g = [];
@@ -22,9 +22,11 @@ const DisplayGraph = () => {
   }
 
   return (
+    <Astar>
       <Container>
         {t()}
       </Container>
+    </Astar>
   )
 }
 

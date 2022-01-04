@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 
 import Scene from './phy';
 //import Model from './model';
-// import Astar from './astar';
+ import Astar from './astar';
 // import Vertex from './vertex';
-import DisplayGraph from './displayGraph';
+//import DisplayGraph from './displayGraph';
 //import App from './App';
 //import './styles.css';
 //
@@ -15,7 +15,8 @@ import DisplayGraph from './displayGraph';
 ReactDOM.render(
   //<Model/>,
   //<Scene/>,
-  <DisplayGraph/>,
+  //<DisplayGraph/>,
+  <Astar/>,
 
 
   document.getElementById('root'));
