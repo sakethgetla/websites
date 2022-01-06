@@ -4,12 +4,16 @@ import { Container, Row, Col } from 'react-grid-system';
 //import DisplayGraph from './displayGraph';
 import Vertex from './vertex';
 import update from 'immutability-helper';
+import PriorityQueue from 'js-priority-queue'
 
 
 const Astar = () => {
 
-  const [nodes, setNodes] = useState([]);
-
+  const [numNodes, setNumNodes] = useState(10);
+  const [visited, setVisited] = useState([]);
+  const [endNode, setEndNode] = useState(90);
+  const [startNode, setStartNode] = useState(0);
+  //var visited = [];
 
   // function handleClick(e) {
   //   const numNodes = 10;
@@ -39,26 +43,45 @@ const Astar = () => {
   // }
 
 
-  function setVisited(x, y, val){
+  function visit(node, val) {
 
-    const numNodes = 10;
-    setNodes(update(nodes, {$splice: [[[(y*numNodes)+x], 1, <Vertex
-                                                              key={(y*numNodes)+x+100+eval(Date.now())}
-                                                        visited={val} gval={0} fval={0} />]]}))
+    //const numNodes = 10;
+    //
+    console.log(visited);
+    // setVisited(update(visited, {
+    //   [(y * numNodes) + x]: {  $set: val  }
+    // }))
+    //console.log((y * numNodes) + x)
+
+    // setVisited(visited.map((item, index) => {
+    //   if (index === node)
+    //     return node;
+    //   else
+    //     return item;
+    // }))
+
+    setVisited(...visited, val)
+
+    console.log(visited);
   }
 
   useEffect(() => {
-    // displayGraph();
-    const numNodes = 10;
-    const g = [];
-    for (var i = 0; i < numNodes*numNodes; ++i) {
-      g.push(<Vertex key={i} visited={true} gval={0} fval={0} />);
-    }
-    setNodes(g);
+    //displayGraph();
+    //const numNodes = 10;
+    // const g = [];
+    // for (var i = 0; i < numNodes * numNodes; ++i) {
+    //   g.push(<Vertex key={i} visited={false} gval={0} fval={0} />);
+    // }
+    //setNodes(g);
+    //
+    //visited = new Array(100).fill(false);
+    setVisited(startNode)
   }, []);
 
   const displayGraph = () => {
-    const numNodes = 10;
+    //const numNodes = 10;
+    console.log('here');
+    console.log(visited);
     const g = [];
     for (var i = 0; i < numNodes; ++i) {
       const row = [];
@@ -66,12 +89,119 @@ const Astar = () => {
         // row.push(<Col key={j * numNodes + i}>
         //            <Vertex/>
         // </Col>)
-        row.push(nodes[(i*numNodes)+j]);
+        row.push(<Vertex key={(i * numNodes) + j + Date.now()} visited={visited[(i * numNodes) + j]} />);
       }
-      g.push(<Row key={i+1111} >{row}</Row>);
+      g.push(<Row key={i + 1111} >{row}</Row>);
     }
     //setNodes(g);
     return g
+
+  }
+
+
+  function getNeighbours(node) {
+    //var y = Math.floor(node/numNodes), x = node%numNodes;
+    var neighs = [];
+
+    if (node > numNodes - 1) {
+      if (node % numNodes > 0) {
+        neighs.push(node - numNodes - 1);
+      }
+      neighs.push(node - numNodes);
+      if (node % numNodes < numNodes - 1) {
+        neighs.push(node - numNodes + 1);
+      }
+    }
+
+
+    if (node % numNodes > 0) {
+      neighs.push(node - 1);
+    }
+    if (node % numNodes < numNodes - 1) {
+      neighs.push(node + 1);
+    }
+
+
+    if (node < (numNodes ** 2) - numNodes) {
+      if (node % numNodes > 0) {
+        neighs.push(node + numNodes - 1);
+      }
+      neighs.push(node + numNodes);
+      if (node % numNodes < numNodes - 1) {
+        neighs.push(node + numNodes + 1);
+      }
+    }
+
+    return neighs;
+  }
+  function hval(node) {
+    var [x1, y1] = getPos(endNode);
+    var [x, y] = getPos(node);
+    return Math.sqrt(((x1 - x) ** 2) + ((y1 - y) ** 2))
+  }
+
+  // console.log(getNeighbours(3));
+  // console.log(getPos(3));
+  // console.log(hval(3));
+  console.log(getNeighbours(0));
+  console.log(hval(0));
+  console.log(hval(1));
+  console.log(hval(10));
+
+  function getPos(node) {
+    return [node % numNodes, Math.floor(node / numNodes)];
+  }
+
+  const start = () => {
+    console.log('here');
+    //var visited = [];
+    var queue = new PriorityQueue({ comparator: (a, b) => { return a[1] - b[1] } });
+    var gval = { 0: 0 };
+    //var fval = {};
+    var prev = { 0: 0 };
+    var found = false;
+
+
+
+
+    queue.queue([startNode, 0])
+
+    while (queue.length > 0 && !found) {
+      //console.log('here')
+
+      var [node, n] = queue.dequeue();
+      var neighbours = getNeighbours(node)
+
+
+      var [x, y] = getPos(node);
+      visit(node, true);
+
+      console.log('visited', node)
+      if (node === endNode) {
+        found = true;
+      } else {
+
+        for (var neighbour of neighbours) {
+          //console.log(neighbour)
+
+          if (!(neighbour in prev)) {
+            if (!(neighbour in prev) || gval[neighbour] > gval[node] + 1) {
+              gval[neighbour] = gval[node] + 1;
+              prev[neighbour] = node;
+              //console.log('fval', gval[neighbour] , hval(neighbour))
+
+              queue.queue([neighbour, gval[neighbour] + hval(neighbour)])
+            }
+          }
+        }
+
+      }
+      //found = true
+
+      //console.log('queue', queue)
+
+    }
+
 
   }
 
@@ -80,11 +210,14 @@ const Astar = () => {
       <Container>
         {displayGraph()}
       </Container>
-      <button onClick={() => setVisited(1, 3, true)}>
+      <button onClick={() => visit(1, 3, true)}>
         true
       </button>
-      <button onClick={() => setVisited(1, 3, false)}>
+      <button onClick={() => visit(1, 3, false)}>
         false
+      </button>
+      <button onClick={start} >
+        start
       </button>
     </div>
   )
