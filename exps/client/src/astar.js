@@ -10,8 +10,8 @@ import PriorityQueue from 'js-priority-queue'
 const Astar = () => {
 
   const [numNodes, setNumNodes] = useState(10);
-  const [visited, setVisited] = useState([]);
-  const [endNode, setEndNode] = useState(90);
+  const [visited, setVisited] = useState(new Array(100).fill(false));
+  const [endNode, setEndNode] = useState(75);
   const [startNode, setStartNode] = useState(0);
   //var visited = [];
 
@@ -43,27 +43,38 @@ const Astar = () => {
   // }
 
 
-  function visit(node, val) {
+  function visit(nodes, val) {
 
     //const numNodes = 10;
     //
-    console.log(visited);
+    var v = new Array(100).fill(false);
+    nodes.forEach(node => {
+    //let [x, y] = getPos(node);
+      v[node] = true;
+    })
+
+    setVisited(v);
+
+    //let [x, y] = getPos(node);
+    //console.log(visited);
     // setVisited(update(visited, {
-    //   [(y * numNodes) + x]: {  $set: val  }
+    //   [(y * numNodes) + x]: { $set: val }
     // }))
     //console.log((y * numNodes) + x)
 
     // setVisited(visited.map((item, index) => {
     //   if (index === node)
-    //     return node;
+    //     return true;
     //   else
     //     return item;
     // }))
 
-    setVisited(...visited, val)
+    //setVisited(visited => [...visited, val])
 
-    console.log(visited);
+    //console.log(visited);
   }
+
+
 
   useEffect(() => {
     //displayGraph();
@@ -75,13 +86,17 @@ const Astar = () => {
     //setNodes(g);
     //
     //visited = new Array(100).fill(false);
-    setVisited(startNode)
+    //setVisited(new Array(100).fill(false))
+    visit([ startNode ], true);
   }, []);
 
+  const getNode = (x, y) => {
+    return (y * numNodes) + x
+  }
   const displayGraph = () => {
     //const numNodes = 10;
     console.log('here');
-    console.log(visited);
+    //console.log(visited);
     const g = [];
     for (var i = 0; i < numNodes; ++i) {
       const row = [];
@@ -89,6 +104,8 @@ const Astar = () => {
         // row.push(<Col key={j * numNodes + i}>
         //            <Vertex/>
         // </Col>)
+
+        //if (getNode(i,j))
         row.push(<Vertex key={(i * numNodes) + j + Date.now()} visited={visited[(i * numNodes) + j]} />);
       }
       g.push(<Row key={i + 1111} >{row}</Row>);
@@ -143,10 +160,10 @@ const Astar = () => {
   // console.log(getNeighbours(3));
   // console.log(getPos(3));
   // console.log(hval(3));
-  console.log(getNeighbours(0));
-  console.log(hval(0));
-  console.log(hval(1));
-  console.log(hval(10));
+  // console.log(getNeighbours(0));
+  // console.log(hval(0));
+  // console.log(hval(1));
+  // console.log(hval(10));
 
   function getPos(node) {
     return [node % numNodes, Math.floor(node / numNodes)];
@@ -160,6 +177,7 @@ const Astar = () => {
     //var fval = {};
     var prev = { 0: 0 };
     var found = false;
+    var path = [];
 
 
 
@@ -170,11 +188,13 @@ const Astar = () => {
       //console.log('here')
 
       var [node, n] = queue.dequeue();
+
       var neighbours = getNeighbours(node)
 
 
       var [x, y] = getPos(node);
-      visit(node, true);
+      //visit(node, true);
+      path.push(node)
 
       console.log('visited', node)
       if (node === endNode) {
@@ -202,6 +222,8 @@ const Astar = () => {
 
     }
 
+    visit(path, true);
+
 
   }
 
@@ -210,12 +232,12 @@ const Astar = () => {
       <Container>
         {displayGraph()}
       </Container>
-      <button onClick={() => visit(1, 3, true)}>
-        true
-      </button>
-      <button onClick={() => visit(1, 3, false)}>
-        false
-      </button>
+      {/* <button onClick={() => visit(1, 3, true)}> */}
+      {/*   true */}
+      {/* </button> */}
+      {/* <button onClick={() => visit(1, 3, false)}> */}
+      {/*   false */}
+      {/* </button> */}
       <button onClick={start} >
         start
       </button>
