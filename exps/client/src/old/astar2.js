@@ -13,40 +13,10 @@ const Astar = () => {
   const [visited, setVisited] = useState(new Array(100).fill(false));
   const [endNode, setEndNode] = useState(75);
   const [startNode, setStartNode] = useState(0);
-  //var visited = [];
-
-  // function handleClick(e) {
-  //   const numNodes = 10;
-  //   const x=1, y=3;
-  //   console.log('clicked')
-  //   setVisited(x, y, true);
-  //   const row = [];
-  //   for (var j = 0; j < numNodes; ++j) {
-  //     row.push(<Col key={j * numNodes + i}>
-  //                <Vertex/>
-  //     </Col>)
-  //     row.push(<Vertex key={j * numNodes + 0} visited={true} gval={0} fval={0} />);
-  //   }
-  //   var n = (y*numNodes)+x;
-  //   console.log(n, "here")
-  //   setNodes(update(nodes, {eval(n) : {$set: <Vertex key={j * numNodes + 0} visited={true} gval={0} fval={0} />}}))
-  //   setNodes(update(nodes, {[(y*numNodes)+x] : {$set: <Vertex key={j * numNodes + 0} visited={true} gval={0} fval={0} />}}))
-  //   setNodes(update(nodes, {0: {$splice: [[2,1,<key Vertex={110} visited={true} gval={0} fval={0} />]]}})
-  //   setNodes(update(nodes, { 0: { 2: { $set: <key Vertex={110} visited={true} gval={0} fval={0} /> } } }))
-  //   const temp = update(nodes[0], { 0: { $set: <Vertex key={110} visited={true} gval={0} fval={0} /> } } )
-  //   setNodes(update(nodes, {0: {$set: <Row key={0 * numNodes + 100} >{temp}</Row>}}))
-  //   setNodes(update(nodes, { 0: { 2: { $set: <key Vertex={110} visited={true} gval={0} fval={0} /> } } }))
-  //   setNodes(update(nodes, { 0: { 2: { $set: <key Vertex={110} visited={true} gval={0} fval={0} /> } } }))
-
-  //   setNodes(update(nodes, {0: {$set: row}})
-
-  // }
-
+  const [dead, setDead] = useState([]);
 
   function visit(nodes, val) {
 
-    //const numNodes = 10;
-    //
     var v = new Array(100).fill(false);
     nodes.forEach(node => {
     //let [x, y] = getPos(node);
@@ -55,39 +25,12 @@ const Astar = () => {
 
     setVisited(v);
 
-    //let [x, y] = getPos(node);
-    //console.log(visited);
-    // setVisited(update(visited, {
-    //   [(y * numNodes) + x]: { $set: val }
-    // }))
-    //console.log((y * numNodes) + x)
-
-    // setVisited(visited.map((item, index) => {
-    //   if (index === node)
-    //     return true;
-    //   else
-    //     return item;
-    // }))
-
-    //setVisited(visited => [...visited, val])
-
-    //console.log(visited);
   }
 
-
-
+  function makeDead(nodes, val) {
+  }
   useEffect(() => {
-    //displayGraph();
-    //const numNodes = 10;
-    // const g = [];
-    // for (var i = 0; i < numNodes * numNodes; ++i) {
-    //   g.push(<Vertex key={i} visited={false} gval={0} fval={0} />);
-    // }
-    //setNodes(g);
-    //
-    //visited = new Array(100).fill(false);
-    //setVisited(new Array(100).fill(false))
-    visit([ startNode ], true);
+    //visit([ startNode ], true);
   }, []);
 
   const getNode = (x, y) => {
@@ -101,12 +44,10 @@ const Astar = () => {
     for (var i = 0; i < numNodes; ++i) {
       const row = [];
       for (var j = 0; j < numNodes; ++j) {
-        // row.push(<Col key={j * numNodes + i}>
-        //            <Vertex/>
-        // </Col>)
-
-        //if (getNode(i,j))
-        row.push(<Vertex key={(i * numNodes) + j + Date.now()} visited={visited[(i * numNodes) + j]} />);
+        row.push(<Vertex key={(i * numNodes) + j + Date.now()}
+                         visited={visited[(i * numNodes) + j]}
+                         /* onClick={() => {makeDead([getNode(i,j)], true)}} />); */
+                         onClick={(e) => {console.log(e)}} />);
       }
       g.push(<Row key={i + 1111} >{row}</Row>);
     }
@@ -157,13 +98,6 @@ const Astar = () => {
     return Math.sqrt(((x1 - x) ** 2) + ((y1 - y) ** 2))
   }
 
-  // console.log(getNeighbours(3));
-  // console.log(getPos(3));
-  // console.log(hval(3));
-  // console.log(getNeighbours(0));
-  // console.log(hval(0));
-  // console.log(hval(1));
-  // console.log(hval(10));
 
   function getPos(node) {
     return [node % numNodes, Math.floor(node / numNodes)];
@@ -232,12 +166,6 @@ const Astar = () => {
       <Container>
         {displayGraph()}
       </Container>
-      {/* <button onClick={() => visit(1, 3, true)}> */}
-      {/*   true */}
-      {/* </button> */}
-      {/* <button onClick={() => visit(1, 3, false)}> */}
-      {/*   false */}
-      {/* </button> */}
       <button onClick={start} >
         start
       </button>
