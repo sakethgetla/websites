@@ -4,22 +4,25 @@ import { Container, Row, Col } from 'react-grid-system';
 //import DisplayGraph from './displayGraph';
 import Vertex from '../vertex';
 import update from 'immutability-helper';
-import PriorityQueue from 'js-priority-queue'
+import PriorityQueue from 'js-priority-queue';
+import DisplayGraph from './displayGraph';
 
 
-const Astar2 = () => {
+const Astar3 = () => {
 
   const [numNodes, setNumNodes] = useState(10);
-  const [visited, setVisited] = useState(new Array(100).fill(false));
+  const [visited, setVisited] = useState([]);
   const [endNode, setEndNode] = useState(75);
   const [startNode, setStartNode] = useState(0);
   const [dead, setDead] = useState([]);
+  const [nodes, setNodes] = useState([]);
+
 
   function visit(nodes, val) {
 
     var v = new Array(100).fill(false);
     nodes.forEach(node => {
-    //let [x, y] = getPos(node);
+      //let [x, y] = getPos(node);
       v[node] = true;
     })
 
@@ -30,13 +33,24 @@ const Astar2 = () => {
   function makeDead(nodes, val) {
   }
 
+
   function reset() {
+    const g = [];
+    for (var i = 0; i < numNodes ** 2; ++i) {
 
+      g.push(<Vertex
+        key={i + Date.now()}
+        visited={visited[i]}
+        location={i}
+      />)
+    }
+    setNodes(g);
   }
-
 
   useEffect(() => {
     //visit([ startNode ], true);
+    //
+    reset();
   }, []);
 
   const getNode = (x, y) => {
@@ -50,10 +64,11 @@ const Astar2 = () => {
     for (var i = 0; i < numNodes; ++i) {
       const row = [];
       for (var j = 0; j < numNodes; ++j) {
-        row.push(<Vertex key={(i * numNodes) + j + Date.now()}
-                         visited={visited[(i * numNodes) + j]}
-                         /* onClick={() => {makeDead([getNode(i,j)], true)}} />); */
-                         onClick={(e) => {console.log(e)}} />);
+        row.push(nodes[(i * numNodes) + j])
+        /* row.push(<Vertex key={(i * numNodes) + j + Date.now()} */
+        /*   visited={visited[(i * numNodes) + j]} */
+        /*   /\* onClick={() => {makeDead([getNode(i,j)], true)}} />); *\/ */
+        /*   onClick={(e) => { console.log(e) }} />); */
       }
       g.push(<Row key={i + 1111} >{row}</Row>);
     }
@@ -172,7 +187,13 @@ const Astar2 = () => {
       <Container>
         {displayGraph()}
       </Container>
-      <button onClick={start} >
+      {/* {nodes} */}
+
+      <DisplayGraph />
+
+      <button onClick={() => {
+        console.log(nodes[0].getLocation)
+      }} >
         start
       </button>
     </div>
@@ -180,4 +201,4 @@ const Astar2 = () => {
 }
 
 
-export default Astar2;
+export default Astar3;

@@ -18,15 +18,19 @@ const Astar = (props) => {
 
   useEffect(() => {
     console.log('use effect');
-    let neigh = [];
-    let nods =[];
+    console.log(props.children);
+    //console.log(props.children[0].getLocation());
 
-    for (var i = 0; i < numNodes * numNodes; ++i) {
-      neigh[i] = getNeighbors(i);
-      //nods.push(new Vertex({visited: false, gval: 0, fval: 0 }));
-    }
-    setNeighbours(neigh);
-    setNodes(nods);
+
+    // let neigh = [];
+    // let nods =[];
+
+    // for (var i = 0; i < numNodes * numNodes; ++i) {
+    //   neigh[i] = getNeighbors(i);
+    //   //nods.push(new Vertex({visited: false, gval: 0, fval: 0 }));
+    // }
+    // setNeighbours(neigh);
+    // setNodes(nods);
 
   }, []);
 
@@ -118,6 +122,12 @@ const Astar = (props) => {
   return (
     <>
       {graph()}
+      <button onClick={() => {
+        console.log(props.children[0])
+        console.log(props.children[0].type.portotype.getLocation())
+      }} >
+        start
+      </button>
     </>
   )
 }

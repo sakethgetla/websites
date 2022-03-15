@@ -8,7 +8,9 @@ import {
 } from "react-router-dom";
 
 import Astar from './Astar';
+import DisplayGraph from './old/displayGraph';
 import Scene from './phy'
+import Home from './Home'
 
 export default function App() {
   return (
@@ -46,7 +48,8 @@ export default function App() {
           {/*   <Users /> */}
           {/* </Route> */}
           <Route path="/" element={<Home/>} />
-          <Route path="/astar" element={<Astar/>} />
+          <Route path="/astar" element={<DisplayGraph/>} />
+          {/* <Route path="/astar" element={<Astar/>} /> */}
           <Route path="/scene" element={<Scene/>} />
         </Routes>
       </div>
@@ -54,9 +57,10 @@ export default function App() {
   );
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
+// function Home() {
+//   console.log('home')
+//   return <h2>Home</h2>;
+// }
 
 function About() {
   return <h2>About</h2>;
