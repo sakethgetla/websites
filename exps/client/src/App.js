@@ -7,7 +7,7 @@ import {
   Link
 } from "react-router-dom";
 
-import Astar from './Astar';
+//import Astar from './Astar';
 import DisplayGraph from './old/displayGraph';
 import Scene from './phy'
 import Home from './Home'

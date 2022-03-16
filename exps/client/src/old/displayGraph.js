@@ -31,7 +31,7 @@ const DisplayGraph = (props) => {
 
   return (
     <Astar>
-        {t()}
+        {/* {t()} */}
       {/* <Container> */}
       {/*   {t()} */}
       {/* </Container> */}

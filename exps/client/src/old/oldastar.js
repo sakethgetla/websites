@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Container, Row, Col } from 'react-grid-system';
-//import Vertex from './vertex';
+import Vertex from '../vertex';
 
 
 
@@ -31,6 +31,10 @@ const Astar = (props) => {
     // }
     // setNeighbours(neigh);
     // setNodes(nods);
+
+    const v = new Vertex();
+
+    console.log(v);
 
   }, []);
 

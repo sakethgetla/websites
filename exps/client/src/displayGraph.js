@@ -23,7 +23,7 @@ const DisplayGraph = () => {
 
   return (
       <Container>
-        {t()}
+        {/* {t()} */}
       </Container>
   )
 }

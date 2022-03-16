@@ -3,20 +3,28 @@ import React, { useState, useEffect } from "react";
 class Vertex extends React.Component {
   constructor(props) {
     super(props);
-    //console.log(props)
+    console.log(props)
+    // this.state = {
+    //   location: this.props.location,
+    //   visited: this.props.visited,
+    //   gval: this.props.gval,
+    //   prev: null,
+    //   fval: this.props.fval,
+    //   neighbours: []
+    // }
     this.state = {
-      location: this.props.location,
-      visited: this.props.visited,
-      gval: this.props.gval,
+      location: 0,
+      visited: false,
+      gval: 0,
       prev: null,
-      fval: this.props.fval,
+      fval: 0,
       neighbours: []
     }
   }
   handleClick() {
     this.setState({ visited: true })
     this.setState({ location: -1 })
-    console.log('clicked')
+    console.log('vertex clicked')
   }
 
   getLocation(){
