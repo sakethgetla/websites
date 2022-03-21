@@ -8,9 +8,9 @@ import {
 } from "react-router-dom";
 
 //import Astar from './Astar';
-import Astar2 from './old/astar2';
-import DisplayGraph from './old/displayGraph';
-import Scene from './phy'
+import Astar from './games/Astar/Astar';
+//import DisplayGraph from './old/displayGraph';
+import Scene from './games/AI/phy'
 import Home from './Home'
 
 export default function App() {
@@ -51,7 +51,7 @@ export default function App() {
           <Route path="/" element={<Home/>} />
           {/* <Route path="/astar" element={<DisplayGraph/>} /> */}
           {/* <Route path="/astar" element={<Astar/>} /> */}
-          <Route path="/astar" element={<Astar2/>} />
+          <Route path="/astar" element={<Astar/>} />
           <Route path="/scene" element={<Scene/>} />
         </Routes>
       </div>

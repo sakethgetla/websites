@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Container, Row, Col } from 'react-grid-system';
 //import DisplayGraph from './displayGraph';
-import Vertex from '../vertex';
-import update from 'immutability-helper';
+import Vertex from './vertex';
+//import update from 'immutability-helper';
 import PriorityQueue from 'js-priority-queue'
 
 
-const Astar2 = () => {
+const Astar = () => {
 
   const [numNodes, setNumNodes] = useState(10);
   //const [visited, setVisited] = useState(new Array(100).fill(false));
@@ -259,4 +259,4 @@ const Astar2 = () => {
 }
 
 
-export default Astar2;
+export default Astar;
