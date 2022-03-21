@@ -5,6 +5,8 @@ import { Container, Row, Col } from 'react-grid-system';
 import Vertex from './vertex';
 //import update from 'immutability-helper';
 import PriorityQueue from 'js-priority-queue'
+import Grid from '@mui/material/Grid';
+
 
 
 const Astar = () => {
@@ -51,33 +53,56 @@ const Astar = () => {
     console.log('visited:', visited);
     console.log('dead:', dead);
     const g = [];
-    for (var j = 0; j < numNodes; ++j) {
-      const row = [];
-      for (var i = 0; i < numNodes; ++i) {
-        // row.push(<button key={(i * numNodes) + j + Date.now()}
-        //                  value={(i * numNodes) + j}
-        //                  onClick={(e) => {
-        //                    console.log("dead: ", e.target.value);
-        //                    makeDead( parseInt(e.target.value) );
-        //                  }}>
-        //            {(i * numNodes) + j}
-        //          </button>);
 
-        //console.log((j * numNodes) + i + Date.now());
-        row.push(<Vertex
-          key={(j * numNodes) + i + Date.now()}
-          path={path.includes(getNode([i, j]))}
-          visited={isVisited(getNode([i, j]))}
-          dead={isDead(getNode([i, j]))}
-          value={getNode([i, j])}
-          onClicked={makeDead}
-        />);
-        // onClick = {(e) => { console.log(e) }} />);
-      }
-      g.push(<Row key={j + 1111} >{row}</Row>);
+    for (var i = 0; i < numNodes**2; ++i) {
+      g.push(
+      <Vertex
+        key={i + Date.now()}
+        path={path.includes(i)}
+        visited={isVisited(i)}
+        dead={isDead(i)}
+        value={i}
+        onClicked={makeDead}
+      />
+      )
     }
+
+    // for (var j = 0; j < numNodes; ++j) {
+    //   const row = [];
+    //   for (var i = 0; i < numNodes; ++i) {
+    //     row.push(<button key={(i * numNodes) + j + Date.now()}
+    //                      value={(i * numNodes) + j}
+    //                      onClick={(e) => {
+    //                        console.log("dead: ", e.target.value);
+    //                        makeDead( parseInt(e.target.value) );
+    //                      }}>
+    //                {(i * numNodes) + j}
+    //              </button>);
+
+    //     console.log((j * numNodes) + i + Date.now());
+    //     row.push(<Vertex
+    //       key={(j * numNodes) + i + Date.now()}
+    //       path={path.includes(getNode([i, j]))}
+    //       visited={isVisited(getNode([i, j]))}
+    //       dead={isDead(getNode([i, j]))}
+    //       value={getNode([i, j])}
+    //       onClicked={makeDead}
+    //     />);
+    //     onClick = {(e) => { console.log(e) }} />);
+    //   }
+    //   g.push(<Grid item xs={2} key={j + 1111} >{row}</Grid>);
+    // }
+    // return g;
+
     //setNodes(g);
-    return g;
+
+    return (
+      <Grid container rowSpacing={1} columnSpacing={{xs: 1}} columns={10}>
+        {g.map((v, i) => (<Grid item xs={1} key={i}>
+                            {v}
+                          </Grid> ))}
+      </Grid>
+    );
 
   }
 
@@ -241,9 +266,9 @@ const Astar = () => {
 
   return (
     <div>
-      <Container>
+      {/* <Grid container spacing={2}> */}
         {displayGraph()}
-      </Container>
+      {/* </Grid> */}
       <button onClick={() => {
         start()
       }} >

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Button from '@mui/material/Button';
+
 
 class Vertex extends React.Component {
   constructor(props) {
@@ -33,23 +35,23 @@ class Vertex extends React.Component {
       //   {this.props.value}
       // </button>
       this.props.path ?
-        <button onClick={() => this.props.onClicked(this.props.value)}>
+        <Button variant="contained" onClick={() => this.props.onClicked(this.props.value)}>
           p
-        </button>
+        </Button>
         :
       this.props.visited ?
-        <button onClick={() => this.props.onClicked(this.props.value)}>
+        <Button variant="contained" onClick={() => this.props.onClicked(this.props.value)}>
           v
-        </button>
+        </Button>
         :
         this.props.dead ?
-          <button onClick={() => this.props.onClicked(this.props.value)}>
+          <Button variant="contained" onClick={() => this.props.onClicked(this.props.value)}>
             d
-          </button>
+          </Button>
           :
-          <button onClick={() => this.props.onClicked(this.props.value)}>
+          <Button variant="contained" onClick={() => this.props.onClicked(this.props.value)}>
             {this.props.value}
-          </button>
+          </Button>
     )
   }
 }

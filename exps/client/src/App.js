@@ -41,16 +41,8 @@ export default function App() {
             renders the first one that matches the current URL. */}
         <Routes>
           <Route path="/about" element={<About/>} />
-          {/* <Route path="/about"> */}
-          {/*   <About /> */}
-          {/* </Route> */}
           <Route path="/users" element={<Users/>} />
-          {/* <Route path="/users"> */}
-          {/*   <Users /> */}
-          {/* </Route> */}
           <Route path="/" element={<Home/>} />
-          {/* <Route path="/astar" element={<DisplayGraph/>} /> */}
-          {/* <Route path="/astar" element={<Astar/>} /> */}
           <Route path="/astar" element={<Astar/>} />
           <Route path="/scene" element={<Scene/>} />
         </Routes>
