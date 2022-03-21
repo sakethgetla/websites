@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 //import Astar from './Astar';
+import Astar2 from './old/astar2';
 import DisplayGraph from './old/displayGraph';
 import Scene from './phy'
 import Home from './Home'
@@ -48,8 +49,9 @@ export default function App() {
           {/*   <Users /> */}
           {/* </Route> */}
           <Route path="/" element={<Home/>} />
-          <Route path="/astar" element={<DisplayGraph/>} />
+          {/* <Route path="/astar" element={<DisplayGraph/>} /> */}
           {/* <Route path="/astar" element={<Astar/>} /> */}
+          <Route path="/astar" element={<Astar2/>} />
           <Route path="/scene" element={<Scene/>} />
         </Routes>
       </div>

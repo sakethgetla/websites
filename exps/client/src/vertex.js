@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 class Vertex extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props)
+    //console.log(props)
     // this.state = {
     //   location: this.props.location,
     //   visited: this.props.visited,
@@ -13,38 +13,43 @@ class Vertex extends React.Component {
     //   neighbours: []
     // }
     this.state = {
-      location: 0,
-      visited: false,
-      gval: 0,
-      prev: null,
-      fval: 0,
-      neighbours: []
+      visited: false
     }
   }
   handleClick() {
-    this.setState({ visited: true })
-    this.setState({ location: -1 })
-    console.log('vertex clicked')
+    // this.setState({ visited: true })
+    // this.setState({ location: -1 })
+    //console.log('vertex clicked')
   }
 
-  getLocation(){
-    return this.state.location;
+  getLocation() {
+    return this.props.value;
   }
 
   render() {
-    console.log('vertex here')
+    //console.log('vertex here')
     return (
-      <button onClick={(e) => this.handleClick(e)}>
-        {this.state.location}
-      </button>
-      // this.state.visited ?
-      // <button onClick={(e) => this.handleClick(e)}>
-      //   v
+      // <button >
+      //   {this.props.value}
       // </button>
-      // :
-      // <button onClick={(e) => this.handleClick(e)}>
-      //   {this.state.location}
-      // </button>
+      this.props.path ?
+        <button onClick={() => this.props.onClicked(this.props.value)}>
+          p
+        </button>
+        :
+      this.props.visited ?
+        <button onClick={() => this.props.onClicked(this.props.value)}>
+          v
+        </button>
+        :
+        this.props.dead ?
+          <button onClick={() => this.props.onClicked(this.props.value)}>
+            d
+          </button>
+          :
+          <button onClick={() => this.props.onClicked(this.props.value)}>
+            {this.props.value}
+          </button>
     )
   }
 }

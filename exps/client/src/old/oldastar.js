@@ -22,19 +22,19 @@ const Astar = (props) => {
     //console.log(props.children[0].getLocation());
 
 
-    // let neigh = [];
-    // let nods =[];
+    let neigh = [];
+    let nods =[];
 
-    // for (var i = 0; i < numNodes * numNodes; ++i) {
-    //   neigh[i] = getNeighbors(i);
-    //   //nods.push(new Vertex({visited: false, gval: 0, fval: 0 }));
-    // }
-    // setNeighbours(neigh);
-    // setNodes(nods);
+    for (var i = 0; i < numNodes * numNodes; ++i) {
+      neigh[i] = getNeighbors(i);
+      nods.push(new Vertex({visited: false, gval: 0, fval: 0 }));
+    }
+    setNeighbours(neigh);
+    setNodes(nods);
 
-    const v = new Vertex();
+    //const v = new Vertex();
 
-    console.log(v);
+    //console.log(v);
 
   }, []);
 
