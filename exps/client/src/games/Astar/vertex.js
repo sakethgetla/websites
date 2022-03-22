@@ -41,7 +41,7 @@ class Vertex extends React.Component {
         color='warning';
         break;
       case 'path':
-        color='success';
+        color='warning';
         break;
       case 'visited':
         color='primary';

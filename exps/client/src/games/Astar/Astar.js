@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'react-grid-system';
 import Vertex from './vertex';
 //import update from 'immutability-helper';
 import PriorityQueue from 'js-priority-queue'
-import Grid from '@mui/material/Grid';
+import {Grid, Button, ButtonGroup } from '@mui/material';
 
 
 
@@ -18,7 +18,8 @@ const Astar = () => {
   const [endNode, setEndNode] = useState(99);
   const [startNode, setStartNode] = useState(0);
   const [dead, setDead] = useState([]);
-  const [algo, setAlgo] = useState('Astar');
+  const [algo, setAlgo] = useState('astar');
+  var algosList = ['heuristic', 'dijkstra', 'astar']
 
   function visit(node) {
     console.log("visit: ", node, visited);
@@ -190,7 +191,8 @@ const Astar = () => {
 
 
 
-    setVisited([]);
+    //setVisited([]);
+    visited = []
 
     queue.queue([startNode, 0])
 
@@ -223,7 +225,20 @@ const Astar = () => {
             prev[neighbour] = node;
             //console.log('fval', gval[neighbour] , hval(neighbour))
 
-            queue.queue([neighbour, gval[neighbour] + (2 * hval(neighbour))])
+            switch (algo) {
+              case algosList[0]:
+                queue.queue([neighbour, hval(neighbour)])
+                break;
+              case algosList[1]:
+                queue.queue([neighbour, gval[neighbour]])
+                break;
+              case algosList[2]:
+                queue.queue([neighbour, gval[neighbour] + (2 * hval(neighbour))])
+                break;
+              default:
+                alert('algo select');
+            }
+            // queue.queue([neighbour, gval[neighbour] + (2 * hval(neighbour))])
             // queue.queue([neighbour, gval[neighbour]])
             // queue.queue([neighbour, hval(neighbour)])
             //}
@@ -262,29 +277,55 @@ const Astar = () => {
 
   }
 
-  function displayAlgosButtons(){
+  function displayAlgosButtons() {
+    var algosList = ['heuristic', 'dijkstra', 'astar']
     return (
-
+      // <ButtonGroup variant="contained" size="large">
+      // </ButtonGroup>
+      <Grid container spacing='10'>
+        <Grid item >
+          <Button variant="contained" color={algo === algosList[0] ? 'secondary' : 'primary'} onClick={() => { setAlgo(algosList[0]) }}>
+            {algosList[0]}
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color={algo === algosList[1] ? 'secondary' : 'primary'} onClick={() => { setAlgo(algosList[1]) }}>
+            {algosList[1]}
+          </Button>
+        </Grid>
+        <Grid item>
+          <Button variant="contained" color={algo === algosList[2] ? 'secondary' : 'primary'} onClick={() => { setAlgo(algosList[2]) }}>
+            {algosList[2]}
+          </Button>
+        </Grid>
+      </Grid>
     )
   }
 
   return (
-    <div>
-      {/* <Grid container spacing={2}> */}
-
-      {displayGraph()}
-      {/* </Grid> */}
-      <button onClick={() => {
-        start()
-      }} >
-        start
-      </button>
-      <button onClick={() => {
-        reset()
-      }} >
-        reset
-      </button>
-    </div>
+    <Grid container spacing='10'>
+      <Grid item >
+        {displayAlgosButtons()}
+      </Grid>
+      <Grid item >
+        {displayGraph()}
+        {/* </Grid> */}
+      </Grid>
+      <Grid item >
+        <Button variant="contained" onClick={() => {
+          start()
+        }} >
+          start
+        </Button>
+      </Grid>
+      <Grid item >
+        <Button variant="contained" onClick={() => {
+          reset()
+        }} >
+          reset
+        </Button>
+      </Grid>
+    </Grid>
   )
 }
 
