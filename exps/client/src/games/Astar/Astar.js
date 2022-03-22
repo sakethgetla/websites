@@ -18,6 +18,7 @@ const Astar = () => {
   const [endNode, setEndNode] = useState(99);
   const [startNode, setStartNode] = useState(0);
   const [dead, setDead] = useState([]);
+  const [algo, setAlgo] = useState('Astar');
 
   function visit(node) {
     console.log("visit: ", node, visited);
@@ -26,8 +27,16 @@ const Astar = () => {
   }
 
   function makeDead(node) {
-    console.log("dead: ", node, dead);
-    setDead([...dead, node])
+    if (isDead(node)) {
+      console.log("revive", node, dead);
+      var dd = dead.filter((d) => { return d !== node })
+      setDead(dd);
+
+    } else {
+      console.log("kill: ", node, dead);
+      setDead([...dead, node])
+
+    }
 
   }
 
@@ -54,53 +63,37 @@ const Astar = () => {
     console.log('dead:', dead);
     const g = [];
 
-    for (var i = 0; i < numNodes**2; ++i) {
+    for (var i = 0; i < numNodes ** 2; ++i) {
+      var type = "";
+
+      if (i === startNode) {
+        type = "start"
+      } else if (i === endNode) {
+        type = "end"
+      } else if (path.includes(i)) {
+        type = "path"
+      } else if (isVisited(i)) {
+        type = "visited"
+      } else if (isDead(i)) {
+        type = "dead"
+      } else {
+      }
+
       g.push(
-      <Vertex
-        key={i + Date.now()}
-        path={path.includes(i)}
-        visited={isVisited(i)}
-        dead={isDead(i)}
-        value={i}
-        onClicked={makeDead}
-      />
-      )
+        <Vertex
+          key={i + Date.now()}
+          type={type}
+          onClicked={makeDead}
+          value={i}
+        />);
     }
 
-    // for (var j = 0; j < numNodes; ++j) {
-    //   const row = [];
-    //   for (var i = 0; i < numNodes; ++i) {
-    //     row.push(<button key={(i * numNodes) + j + Date.now()}
-    //                      value={(i * numNodes) + j}
-    //                      onClick={(e) => {
-    //                        console.log("dead: ", e.target.value);
-    //                        makeDead( parseInt(e.target.value) );
-    //                      }}>
-    //                {(i * numNodes) + j}
-    //              </button>);
-
-    //     console.log((j * numNodes) + i + Date.now());
-    //     row.push(<Vertex
-    //       key={(j * numNodes) + i + Date.now()}
-    //       path={path.includes(getNode([i, j]))}
-    //       visited={isVisited(getNode([i, j]))}
-    //       dead={isDead(getNode([i, j]))}
-    //       value={getNode([i, j])}
-    //       onClicked={makeDead}
-    //     />);
-    //     onClick = {(e) => { console.log(e) }} />);
-    //   }
-    //   g.push(<Grid item xs={2} key={j + 1111} >{row}</Grid>);
-    // }
-    // return g;
-
-    //setNodes(g);
 
     return (
-      <Grid container rowSpacing={1} columnSpacing={{xs: 1}} columns={10}>
+      <Grid container rowSpacing={1} columnSpacing={{ xs: 1 }} columns={10}>
         {g.map((v, i) => (<Grid item xs={1} key={i}>
-                            {v}
-                          </Grid> ))}
+          {v}
+        </Grid>))}
       </Grid>
     );
 
@@ -130,7 +123,8 @@ const Astar = () => {
     var neighs = [];
     var pos = getPos(node);
 
-    const n = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1]];
+    //const n = [[-1, -1], [0, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [0, 1], [1, 1]];
+    const n = [[0, -1], [-1, 0], [1, 0], [0, 1]];
     // console.log(pos);
 
     for (const i of n) {
@@ -221,13 +215,18 @@ const Astar = () => {
         for (var neighbour of neighbours) {
           //console.log(neighbour)
 
-          if (!(neighbour in prev)) {
-            // if (!(neighbour in prev) || gval[neighbour] > gval[node] + 1) {
+          //if (!(neighbour in prev)) {
+          if (!(neighbour in prev) || gval[neighbour] > gval[node] + 1) {
+            //if (neighbour in prev && neighbour in gval && gval[neighbour] < gval[node] + 1 ){
+
             gval[neighbour] = gval[node] + 1;
             prev[neighbour] = node;
             //console.log('fval', gval[neighbour] , hval(neighbour))
 
-            queue.queue([neighbour, gval[neighbour] + hval(neighbour)])
+            queue.queue([neighbour, gval[neighbour] + (2 * hval(neighbour))])
+            // queue.queue([neighbour, gval[neighbour]])
+            // queue.queue([neighbour, hval(neighbour)])
+            //}
           }
           // }
         }
@@ -261,13 +260,19 @@ const Astar = () => {
       setPath(pp);
     }
 
+  }
 
+  function displayAlgosButtons(){
+    return (
+
+    )
   }
 
   return (
     <div>
       {/* <Grid container spacing={2}> */}
-        {displayGraph()}
+
+      {displayGraph()}
       {/* </Grid> */}
       <button onClick={() => {
         start()
