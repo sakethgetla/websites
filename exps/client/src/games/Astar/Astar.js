@@ -191,8 +191,8 @@ const Astar = () => {
 
 
 
-    //setVisited([]);
-    visited = []
+    //setVisited([]); doesnt work. why?
+    //visited = []
 
     queue.queue([startNode, 0])
 
