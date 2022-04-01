@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
+import Paper from '@mui/material/Paper';
 
 
 class Vertex extends React.Component {
@@ -59,9 +60,16 @@ class Vertex extends React.Component {
       // <button >
       //   {this.props.value}
       // </button>
-        <Button variant="contained" color={color} onClick={() => this.props.onClicked(this.props.value)}>
+        // <Button variant="contained" size={'large'} color={color} onClick={() => this.props.onClicked(this.props.value)}>
+      <Button variant="contained" sx={{ height: 100, width:100 }} color={color} onClick={() => this.props.onClicked(this.props.value)}>
            +
+        {this.props.value}
       </Button>
+
+      // <Paper onClick={() => this.props.onClicked(this.props.value)}>
+      //   {this.props.value}
+      // </Paper>
+
       // this.props.path ?
       //   <Button variant="contained" onClick={() => this.props.onClicked(this.props.value)}>
       //     p

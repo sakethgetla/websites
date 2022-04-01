@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'react-grid-system';
 import Vertex from './vertex';
 //import update from 'immutability-helper';
 import PriorityQueue from 'js-priority-queue'
-import {Grid, Button, ButtonGroup } from '@mui/material';
+import { Grid, Button, ButtonGroup, Paper} from '@mui/material';
 
 
 
@@ -57,48 +57,93 @@ const Astar = () => {
   const getNode = ([x, y]) => {
     return (y * numNodes) + x;
   }
+
   const displayGraph = () => {
-    //const numNodes = 10;
-    //console.log('here');
-    console.log('visited:', visited);
-    console.log('dead:', dead);
-    const g = [];
-
-    for (var i = 0; i < numNodes ** 2; ++i) {
-      var type = "";
-
-      if (i === startNode) {
-        type = "start"
-      } else if (i === endNode) {
-        type = "end"
-      } else if (path.includes(i)) {
-        type = "path"
-      } else if (isVisited(i)) {
-        type = "visited"
-      } else if (isDead(i)) {
-        type = "dead"
-      } else {
-      }
-
-      g.push(
-        <Vertex
-          key={i + Date.now()}
-          type={type}
-          onClicked={makeDead}
-          value={i}
-        />);
-    }
-
-
     return (
-      <Grid container rowSpacing={1} columnSpacing={{ xs: 1 }} columns={10}>
-        {g.map((v, i) => (<Grid item xs={1} key={i}>
-          {v}
-        </Grid>))}
-      </Grid>
-    );
+      <Grid container spacing={3} columns={10}>
+        {Array.apply(0, Array(numNodes**2)).map((x, i) => (
 
+          <Grid item xs={1}>
+            <Vertex
+              key={i + Date.now()}
+              type={"path"}
+              onClicked={makeDead}
+              value={i}
+            />
+
+          </Grid>
+        ))}
+      </Grid>
+    )
   }
+  // const displayGraph = () => {
+  //   return (
+  //     <Grid container>
+  //       {Array.apply(0, Array(numNodes)).map((x, j) => (
+  //         <Grid container spacing={2}>
+  //             {Array.apply(0, Array(numNodes)).map((x, i) => (
+
+  //               <Grid item >
+  //                 <Vertex
+  //                   key={j + Date.now()}
+  //                   type={"path"}
+  //                   onClicked={makeDead}
+  //                   value={(j * numNodes) + i}
+  //                 />
+
+  //               </Grid>
+  //             ))}
+  //           </Grid>
+  //       ))}
+  //         </Grid>
+  //       )
+  // }
+
+
+  // const displayGraph = () => {
+  //   //const numNodes = 10;
+  //   //console.log('here');
+  //   console.log('visited:', visited);
+  //   console.log('dead:', dead);
+  //   var g = [];
+
+  //   for (var j = 0; j < numNodes; ++j) {
+  //     var type = "";
+
+  //     if (j === startNode) {
+  //       type = "start"
+  //     } else if (j === endNode) {
+  //       type = "end"
+  //     } else if (path.includes(j)) {
+  //       type = "path"
+  //     } else if (isVisited(j)) {
+  //       type = "visited"
+  //     } else if (isDead(j)) {
+  //       type = "dead"
+  //     } else {
+  //     }
+
+  //     g.push(
+  //       <Vertex
+  //         key={j + Date.now()}
+  //         type={type}
+  //         onClicked={makeDead}
+  //         value={j}
+  //       />);
+  //   }
+
+
+  //   return (
+  //     // <Grid container rowSpacing={1} columnSpacing={{ xs: 1 }} columns={10}>
+  //     <Grid container spacing={1} columns={10}>
+  //       {g}
+  //       {/* {g.map((v, i) => (<Grid item key={i}> */}
+  //       {/*   {v} */}
+  //       {/* </Grid>))} */}
+  //     </Grid>
+  //   );
+
+  // }
 
   function isVisited(node) {
     return visited.includes(node)
@@ -282,7 +327,7 @@ const Astar = () => {
     return (
       // <ButtonGroup variant="contained" size="large">
       // </ButtonGroup>
-      <Grid container spacing='10'>
+      <Grid container spacing={3}>
         <Grid item >
           <Button variant="contained" color={algo === algosList[0] ? 'secondary' : 'primary'} onClick={() => { setAlgo(algosList[0]) }}>
             {algosList[0]}
@@ -303,15 +348,15 @@ const Astar = () => {
   }
 
   return (
-    <Grid container spacing='10'>
+    <Grid container spacing={4}>
       <Grid item >
         {displayAlgosButtons()}
       </Grid>
-      <Grid item >
+      <Grid item xs={12}>
         {displayGraph()}
         {/* </Grid> */}
       </Grid>
-      <Grid item >
+      <Grid item xs={1.5}>
         <Button variant="contained" onClick={() => {
           start()
         }} >
