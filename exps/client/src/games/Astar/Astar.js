@@ -11,7 +11,7 @@ import { Grid, Button, ButtonGroup, Paper } from '@mui/material';
 
 const Astar = () => {
 
-  const [numNodes, setNumNodes] = useState(9);
+  const [numNodes, setNumNodes] = useState(10);
   //const [visited, setVisited] = useState(new Array(100).fill(false));
   // const [visited, setVisited] = useState([]);
   // const [path, setPath] = useState([]);
@@ -82,7 +82,27 @@ const Astar = () => {
   }
 
   // const displayGraph = () => {
+  //   console.log("nodes", nodeStatus);
+  //   return (
+  //     <div>
+  //       {Array.apply(0, Array(numNodes ** 2)).map((x, i) => (
 
+  //         <>
+  //           <Vertex
+
+  //             key={i + Date.now()}
+  //             type={nodeStatus[i]}
+  //             onClicked={makeDead}
+  //             value={i}
+  //           />
+
+  //         </>
+  //       ))}
+  //     </div>
+  //   )
+  // }
+
+  // const displayGraph = () => {
   //   console.log("nodes", nodeStatus);
   //   return (
   //     <Grid container spacing={3} columns={numNodes}>
@@ -90,6 +110,7 @@ const Astar = () => {
 
   //         <Grid item xs={1, {maxWidth: 1}} key={i + Date.now()}>
   //           <Vertex
+
   //             key={i + Date.now()}
   //             type={nodeStatus[i]}
   //             onClicked={makeDead}
@@ -106,12 +127,12 @@ const Astar = () => {
     return (
       <Grid container >
         {Array.apply(0, Array(numNodes)).map((x, j) => (
-          <Grid container  key={ j + Date.now()} spacing={0} sx={{height: '100%'}} columns={numNodes}>
+          <Grid container key={j + Date.now()} spacing={0} columns={numNodes}>
             {Array.apply(0, Array(numNodes)).map((x, i) => (
-              // <Grid item sx={{height: 100, width: 100}} >
-              <Grid item xs={1} key={ (j * numNodes) + i+ Date.now()} >
+              // <Grid item sx={{ height: 100, width: 100 }} >
+              <Grid item xs={1} key={(j * numNodes) + i + Date.now()} >
                 <Vertex
-                  key={ (j * numNodes) + i+ Date.now()}
+                  key={(j * numNodes) + i + Date.now()}
                   type={nodeStatus[(j * numNodes) + i]}
                   onClicked={makeDead}
                   value={(j * numNodes) + i}
@@ -125,51 +146,29 @@ const Astar = () => {
     )
   }
 
-
   // const displayGraph = () => {
-  //   //const numNodes = 10;
-  //   //console.log('here');
-  //   console.log('visited:', visited);
-  //   console.log('dead:', dead);
-  //   var g = [];
-
-  //   for (var j = 0; j < numNodes; ++j) {
-  //     var type = "";
-
-  //     if (j === startNode) {
-  //       type = "start"
-  //     } else if (j === endNode) {
-  //       type = "end"
-  //     } else if (path.includes(j)) {
-  //       type = "path"
-  //     } else if (isVisited(j)) {
-  //       type = "visited"
-  //     } else if (isDead(j)) {
-  //       type = "dead"
-  //     } else {
-  //     }
-
-  //     g.push(
-  //       <Vertex
-  //         key={j + Date.now()}
-  //         type={type}
-  //         onClicked={makeDead}
-  //         value={j}
-  //       />);
-  //   }
-
-
   //   return (
-  //     // <Grid container rowSpacing={1} columnSpacing={{ xs: 1 }} columns={10}>
-  //     <Grid container spacing={1} columns={10}>
-  //       {g}
-  //       {/* {g.map((v, i) => (<Grid item key={i}> */}
-  //       {/*   {v} */}
-  //       {/* </Grid>))} */}
-  //     </Grid>
-  //   );
+  //     <div>
+  //       {Array.apply(0, Array(numNodes)).map((x, j) => (
+  //         <div display="flex" >
+  //           {Array.apply(0, Array(numNodes)).map((x, i) => (
+  //             <div display="flex" >
+  //               <Vertex
+  //                 key={(j * numNodes) + i + Date.now()}
+  //                 type={nodeStatus[(j * numNodes) + i]}
+  //                 onClicked={makeDead}
+  //                 value={(j * numNodes) + i}
+  //               />
 
+  //             </div>
+  //           ))}
+  //         </div>
+  //       ))}
+  //     </div>
+  //   )
   // }
+
+
 
   function isVisited(node) {
     return nodeStatus[node] === 'visited' || nodeStatus[node] === 'path'
@@ -338,7 +337,7 @@ const Astar = () => {
 
     //setNodeStatus(visiting);
 
-    //setNodeStatus(prev => { return{  ...prev,[  node ]: "path"} });
+    //setNodeStatus(prev => { return{...prev, [node]: "path"} });
     // set final path
 
 

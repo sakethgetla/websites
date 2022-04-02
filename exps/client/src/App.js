@@ -12,7 +12,7 @@ import Astar from './games/Astar/Astar';
 //import DisplayGraph from './old/displayGraph';
 import Scene from './games/AI/phy'
 import Home from './Home'
-import { ButtonGroup, Button } from '@mui/material';
+import { AppBar, ButtonGroup, Button } from '@mui/material';
 
 export default function App() {
   return (
@@ -20,6 +20,7 @@ export default function App() {
       <div>
         <nav>
           <ul>
+            <AppBar position='static'>
             <ButtonGroup variant="" size="large">
               <Link to="/">
                 <Button variant="contained">
@@ -51,6 +52,7 @@ export default function App() {
                   </Link>
 
             </ButtonGroup>
+            </AppBar>
 
           </ul>
         </nav>
