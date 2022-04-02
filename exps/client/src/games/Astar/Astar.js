@@ -5,99 +5,125 @@ import { Container, Row, Col } from 'react-grid-system';
 import Vertex from './vertex';
 //import update from 'immutability-helper';
 import PriorityQueue from 'js-priority-queue'
-import { Grid, Button, ButtonGroup, Paper} from '@mui/material';
+import { Grid, Button, ButtonGroup, Paper } from '@mui/material';
 
 
 
 const Astar = () => {
 
-  const [numNodes, setNumNodes] = useState(10);
+  const [numNodes, setNumNodes] = useState(9);
   //const [visited, setVisited] = useState(new Array(100).fill(false));
-  const [visited, setVisited] = useState([]);
-  const [path, setPath] = useState([]);
-  const [endNode, setEndNode] = useState(99);
-  const [startNode, setStartNode] = useState(0);
-  const [dead, setDead] = useState([]);
+  // const [visited, setVisited] = useState([]);
+  // const [path, setPath] = useState([]);
+  // const [endNode, setEndNode] = useState(99);
+  // const [startNode, setStartNode] = useState(0);
+  // const [dead, setDead] = useState([]);
+
   const [algo, setAlgo] = useState('astar');
+  const [nodeStatus, setNodeStatus] = useState({});
   var algosList = ['heuristic', 'dijkstra', 'astar']
+  var startNode = 0;
+  var endNode = (numNodes ** 2) - 1;
 
   function visit(node) {
-    console.log("visit: ", node, visited);
-    setVisited([...visited, node]);
+    //console.log("visit: ", node, visited);
+    //setVisited([...'dead'
+
+    //setNodeStatus({node: "visited"});
+    setNodeStatus(prev => { return { ...prev, [node]: "visited" } });
 
   }
 
   function makeDead(node) {
+    //setNodeStatus({node: "dead"});
+    //console.log("nodes", nodeStatus);
     if (isDead(node)) {
-      console.log("revive", node, dead);
-      var dd = dead.filter((d) => { return d !== node })
-      setDead(dd);
+      console.log("revive", node);
+      //var dd = dead.filter((d) => { return d !== node })
+      //setDead(dd);
+      //setNodeStatus({node: "alive"});
+      setNodeStatus(prev => { return { ...prev, [node]: "alive" } });
 
     } else {
-      console.log("kill: ", node, dead);
-      setDead([...dead, node])
+      //console.log("kill: ", node, dead);
+      console.log("kill", node);
+      //setDead([...dead, node])
 
+      setNodeStatus(prev => { return { ...prev, [node]: "dead" } });
     }
 
   }
 
   function reset() {
-    setVisited([])
-    setDead([])
-    setPath([])
-
+    //setVisited([])
+    //setDead([])
+    //setPath([])
+    var n = {};
+    for (var i = 0; i < numNodes ** 2; ++i) {
+      n[i] = "alive";
+    }
+    n[0] = 'startNode';
+    n[-1 + (numNodes ** 2)] = 'endNode';
+    setNodeStatus(n);
+    console.log('reset', n)
   }
 
 
   useEffect(() => {
     //visit([ startNode ], true);
     console.log('render');
-  });
+    reset();
+    //console.log(nodeStatus)
+
+  }, []);
 
   const getNode = ([x, y]) => {
     return (y * numNodes) + x;
   }
 
+  // const displayGraph = () => {
+
+  //   console.log("nodes", nodeStatus);
+  //   return (
+  //     <Grid container spacing={3} columns={numNodes}>
+  //       {Array.apply(0, Array(numNodes ** 2)).map((x, i) => (
+
+  //         <Grid item xs={1, {maxWidth: 1}} key={i + Date.now()}>
+  //           <Vertex
+  //             key={i + Date.now()}
+  //             type={nodeStatus[i]}
+  //             onClicked={makeDead}
+  //             value={i}
+  //           />
+
+  //         </Grid>
+  //       ))}
+  //     </Grid>
+  //   )
+  // }
+
   const displayGraph = () => {
     return (
-      <Grid container spacing={3} columns={10}>
-        {Array.apply(0, Array(numNodes**2)).map((x, i) => (
+      <Grid container >
+        {Array.apply(0, Array(numNodes)).map((x, j) => (
+          <Grid container  key={ j + Date.now()} spacing={0} sx={{height: '100%'}} columns={numNodes}>
+            {Array.apply(0, Array(numNodes)).map((x, i) => (
+              // <Grid item sx={{height: 100, width: 100}} >
+              <Grid item xs={1} key={ (j * numNodes) + i+ Date.now()} >
+                <Vertex
+                  key={ (j * numNodes) + i+ Date.now()}
+                  type={nodeStatus[(j * numNodes) + i]}
+                  onClicked={makeDead}
+                  value={(j * numNodes) + i}
+                />
 
-          <Grid item xs={1}>
-            <Vertex
-              key={i + Date.now()}
-              type={"path"}
-              onClicked={makeDead}
-              value={i}
-            />
-
+              </Grid>
+            ))}
           </Grid>
         ))}
       </Grid>
     )
   }
-  // const displayGraph = () => {
-  //   return (
-  //     <Grid container>
-  //       {Array.apply(0, Array(numNodes)).map((x, j) => (
-  //         <Grid container spacing={2}>
-  //             {Array.apply(0, Array(numNodes)).map((x, i) => (
-
-  //               <Grid item >
-  //                 <Vertex
-  //                   key={j + Date.now()}
-  //                   type={"path"}
-  //                   onClicked={makeDead}
-  //                   value={(j * numNodes) + i}
-  //                 />
-
-  //               </Grid>
-  //             ))}
-  //           </Grid>
-  //       ))}
-  //         </Grid>
-  //       )
-  // }
 
 
   // const displayGraph = () => {
@@ -146,11 +172,12 @@ const Astar = () => {
   // }
 
   function isVisited(node) {
-    return visited.includes(node)
+    return nodeStatus[node] === 'visited' || nodeStatus[node] === 'path'
   }
 
   function isDead(node) {
-    return dead.includes(node)
+    console.log('is dead', nodeStatus[node])
+    return nodeStatus[node] === 'dead'
   }
 
   function inGraph(node) {
@@ -232,7 +259,7 @@ const Astar = () => {
     //var fval = {};
     var prev = { 0: 0 };
     var found = false;
-    var visiting = [];
+    var visiting = {};
 
 
 
@@ -251,7 +278,9 @@ const Astar = () => {
 
       var [x, y] = getPos(node);
       //visit(node);
-      visiting.push(node)
+      // visiting.push(node)
+      visiting[node] = 'visited';
+
       // console.log(node);
 
       //console.log('visited', node)
@@ -299,7 +328,7 @@ const Astar = () => {
     }
 
     //setVisited([...visited, path ]);
-    setVisited([...visited, ...visiting]);
+    //setVisited([...visited, ...visiting]);
     //console.log('path', path, visited);
     //setVisited([...visited, ...path])
     // path.forEach(p => {
@@ -307,19 +336,31 @@ const Astar = () => {
     //   visit(p)
     // });
 
+    //setNodeStatus(visiting);
 
+    //setNodeStatus(prev => { return{  ...prev,[  node ]: "path"} });
     // set final path
 
+
+    var pp = visiting;
     if (found) {
       var p = endNode
-      var pp = [p];
-      while (prev[p] != startNode) {
-        pp.push(prev[p])
+      pp[p] = 'path';
+      while (prev[p] !== startNode) {
+        //pp.push(prev[p])
+        //setNodeStatus(prev => { return{  ...prev,[  node ]: "path"} });
         p = prev[p];
+        pp[p] = 'path';
       }
-      setPath(pp);
+      pp[startNode] = 'path';
+      //setPath(pp);
+      //console.log('set path', nodeStatus)
     }
 
+    setNodeStatus(prevNodes => {
+      console.log('set path', prevNodes)
+      return { ...prevNodes, ...pp }
+    });
   }
 
   function displayAlgosButtons() {

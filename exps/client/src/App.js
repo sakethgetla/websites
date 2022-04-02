@@ -22,30 +22,30 @@ export default function App() {
           <ul>
             <ButtonGroup variant="" size="large">
               <Link to="/">
-                <Button >
+                <Button variant="contained">
                   Home
                 </Button>
               </Link>
                   <Link to="/about">
-                    <Button >
+                    <Button variant="contained">
                       about
                     </Button>
                   </Link>
 
                   <Link to="/users">
-                    <Button >
+                    <Button variant="contained">
                       users
                     </Button>
                   </Link>
 
                   <Link to="/scene">
-                    <Button >
+                    <Button variant="contained">
                       Scene
                     </Button>
                   </Link>
 
                   <Link to="/astar">
-                    <Button >
+                    <Button variant="contained">
                       astar
                     </Button>
                   </Link>

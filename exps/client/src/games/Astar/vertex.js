@@ -35,11 +35,11 @@ class Vertex extends React.Component {
     var color = '';
 
     switch(this.props.type){
-      case 'end':
-        color='warning';
+      case 'endNode':
+        color='success';
         break;
-      case 'start':
-        color='warning';
+      case 'startNode':
+        color='success';
         break;
       case 'path':
         color='warning';
@@ -61,9 +61,11 @@ class Vertex extends React.Component {
       //   {this.props.value}
       // </button>
         // <Button variant="contained" size={'large'} color={color} onClick={() => this.props.onClicked(this.props.value)}>
-      <Button variant="contained" sx={{ height: 100, width:100 }} color={color} onClick={() => this.props.onClicked(this.props.value)}>
-           +
-        {this.props.value}
+      // <Button variant="contained" sx={{ height: 50, width:10 }} color={color} onClick={() => this.props.onClicked(this.props.value)}>
+      // <Button variant="contained"  size={'large'} fullWidth={true} color={color} onClick={() => this.props.onClicked(this.props.value)}>
+      <Button variant="contained" sx={{ height: '100%', width:'100%' }} color={color} onClick={() => this.props.onClicked(this.props.value)}>
+           {/* + */}
+        {/* {this.props.value} */}
       </Button>
 
       // <Paper onClick={() => this.props.onClicked(this.props.value)}>
