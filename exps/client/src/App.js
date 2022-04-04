@@ -21,37 +21,39 @@ export default function App() {
         <nav>
           <ul>
             <AppBar position='static'>
-            <ButtonGroup variant="" size="large">
-              <Link to="/">
-                <Button variant="contained">
-                  Home
-                </Button>
-              </Link>
-                  <Link to="/about">
-                    <Button variant="contained">
-                      about
-                    </Button>
-                  </Link>
+              <ButtonGroup variant="" size="large">
 
-                  <Link to="/users">
-                    <Button variant="contained">
-                      users
-                    </Button>
-                  </Link>
+                <Link to="/">
+                  <Button variant="contained">
+                    Home
+                  </Button>
+                </Link>
 
-                  <Link to="/scene">
-                    <Button variant="contained">
-                      Scene
-                    </Button>
-                  </Link>
+                <Link to="/about">
+                  <Button variant="contained">
+                    about
+                  </Button>
+                </Link>
 
-                  <Link to="/astar">
-                    <Button variant="contained">
-                      astar
-                    </Button>
-                  </Link>
+                <Link to="/users">
+                  <Button variant="contained">
+                    users
+                  </Button>
+                </Link>
 
-            </ButtonGroup>
+                <Link to="/scene">
+                  <Button variant="contained">
+                    Scene
+                  </Button>
+                </Link>
+
+                <Link to="/astar">
+                  <Button variant="contained">
+                    astar
+                  </Button>
+                </Link>
+
+              </ButtonGroup>
             </AppBar>
 
           </ul>

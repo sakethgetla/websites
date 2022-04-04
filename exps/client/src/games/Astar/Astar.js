@@ -1,106 +1,68 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
-import { Container, Row, Col } from 'react-grid-system';
+//import { Container, Row, Col } from 'react-grid-system';
 //import DisplayGraph from './displayGraph';
-import Vertex from './vertex';
+import { nodeStatusType, Vertex } from './vertex';
 //import update from 'immutability-helper';
 import PriorityQueue from 'js-priority-queue'
-import { Grid, Button, ButtonGroup, Paper } from '@mui/material';
-
+import { Container, Grid, Button, ButtonGroup, Paper } from '@mui/material';
+import ReplayIcon from '@mui/icons-material/Replay';
+import SendIcon from '@mui/icons-material/Send';
+//import NavigationIcon from '@mui/icons-material/Psychology';
+import NavigationIcon from '@mui/icons-material/TransferWithinAStation';
+import walking from "./walking.jpg"
 
 
 const Astar = () => {
 
   const [numNodes, setNumNodes] = useState(10);
-  //const [visited, setVisited] = useState(new Array(100).fill(false));
-  // const [visited, setVisited] = useState([]);
-  // const [path, setPath] = useState([]);
-  // const [endNode, setEndNode] = useState(99);
-  // const [startNode, setStartNode] = useState(0);
-  // const [dead, setDead] = useState([]);
-
-  const [algo, setAlgo] = useState('astar');
+  const [algoSelect, setAlgoSelect] = useState('astar');
   const [nodeStatus, setNodeStatus] = useState({});
   var algosList = ['heuristic', 'dijkstra', 'astar']
   var startNode = 0;
   var endNode = (numNodes ** 2) - 1;
 
-  function visit(node) {
-    //console.log("visit: ", node, visited);
-    //setVisited([...'dead'
 
+  function visit(node) {
     //setNodeStatus({node: "visited"});
-    setNodeStatus(prev => { return { ...prev, [node]: "visited" } });
+    setNodeStatus(prev => { return { ...prev, [node]: nodeStatusType.visited } });
 
   }
 
   function makeDead(node) {
-    //setNodeStatus({node: "dead"});
     //console.log("nodes", nodeStatus);
     if (isDead(node)) {
-      console.log("revive", node);
-      //var dd = dead.filter((d) => { return d !== node })
-      //setDead(dd);
-      //setNodeStatus({node: "alive"});
-      setNodeStatus(prev => { return { ...prev, [node]: "alive" } });
+      //console.log("revive", node);
+      setNodeStatus(prev => { return { ...prev, [node]: nodeStatusType.alive } });
 
     } else {
-      //console.log("kill: ", node, dead);
-      console.log("kill", node);
-      //setDead([...dead, node])
-
-      setNodeStatus(prev => { return { ...prev, [node]: "dead" } });
+      //console.log("kill", node);
+      setNodeStatus(prev => { return { ...prev, [node]: nodeStatusType.dead } });
     }
 
   }
 
   function reset() {
-    //setVisited([])
-    //setDead([])
-    //setPath([])
     var n = {};
     for (var i = 0; i < numNodes ** 2; ++i) {
-      n[i] = "alive";
+      n[i] = nodeStatusType.alive;
     }
-    n[0] = 'startNode';
-    n[-1 + (numNodes ** 2)] = 'endNode';
+    n[0] = nodeStatusType.startNode;
+    n[-1 + (numNodes ** 2)] = nodeStatusType.endNode;
     setNodeStatus(n);
-    console.log('reset', n)
+    //console.log('reset', n)
   }
 
 
   useEffect(() => {
-    //visit([ startNode ], true);
-    console.log('render');
+    //console.log('');
     reset();
-    //console.log(nodeStatus)
-
   }, []);
 
   const getNode = ([x, y]) => {
     return (y * numNodes) + x;
   }
 
-  // const displayGraph = () => {
-  //   console.log("nodes", nodeStatus);
-  //   return (
-  //     <div>
-  //       {Array.apply(0, Array(numNodes ** 2)).map((x, i) => (
-
-  //         <>
-  //           <Vertex
-
-  //             key={i + Date.now()}
-  //             type={nodeStatus[i]}
-  //             onClicked={makeDead}
-  //             value={i}
-  //           />
-
-  //         </>
-  //       ))}
-  //     </div>
-  //   )
-  // }
 
   // const displayGraph = () => {
   //   console.log("nodes", nodeStatus);
@@ -125,7 +87,8 @@ const Astar = () => {
 
   const displayGraph = () => {
     return (
-      <Grid container >
+      <Grid container maxWidth='sm'>
+        {/* <Container maxWidth='sm'> */}
         {Array.apply(0, Array(numNodes)).map((x, j) => (
           <Grid container key={j + Date.now()} spacing={0} columns={numNodes}>
             {Array.apply(0, Array(numNodes)).map((x, i) => (
@@ -142,41 +105,20 @@ const Astar = () => {
             ))}
           </Grid>
         ))}
+        {/* </Container  > */}
       </Grid>
     )
   }
 
-  // const displayGraph = () => {
-  //   return (
-  //     <div>
-  //       {Array.apply(0, Array(numNodes)).map((x, j) => (
-  //         <div display="flex" >
-  //           {Array.apply(0, Array(numNodes)).map((x, i) => (
-  //             <div display="flex" >
-  //               <Vertex
-  //                 key={(j * numNodes) + i + Date.now()}
-  //                 type={nodeStatus[(j * numNodes) + i]}
-  //                 onClicked={makeDead}
-  //                 value={(j * numNodes) + i}
-  //               />
-
-  //             </div>
-  //           ))}
-  //         </div>
-  //       ))}
-  //     </div>
-  //   )
-  // }
-
 
 
   function isVisited(node) {
-    return nodeStatus[node] === 'visited' || nodeStatus[node] === 'path'
+    return nodeStatus[node] === nodeStatusType.visited || nodeStatus[node] === nodeStatusType.path
   }
 
   function isDead(node) {
-    console.log('is dead', nodeStatus[node])
-    return nodeStatus[node] === 'dead'
+    //console.log('is dead', nodeStatus[node])
+    return nodeStatus[node] === nodeStatusType.dead
   }
 
   function inGraph(node) {
@@ -208,34 +150,6 @@ const Astar = () => {
       }
     }
 
-    // if (node > numNodes - 1) {
-    //   if (node % numNodes > 0) {
-    //     neighs.push(node - numNodes - 1);
-    //   }
-    //   neighs.push(node - numNodes);
-    //   if (node % numNodes < numNodes - 1) {
-    //     neighs.push(node - numNodes + 1);
-    //   }
-    // }
-
-
-    // if (node % numNodes > 0) {
-    //   neighs.push(node - 1);
-    // }
-    // if (node % numNodes < numNodes - 1) {
-    //   neighs.push(node + 1);
-    // }
-
-
-    // if (node < (numNodes ** 2) - numNodes) {
-    //   if (node % numNodes > 0) {
-    //     neighs.push(node + numNodes - 1);
-    //   }
-    //   neighs.push(node + numNodes);
-    //   if (node % numNodes < numNodes - 1) {
-    //     neighs.push(node + numNodes + 1);
-    //   }
-    // }
 
     return neighs;
   }
@@ -251,7 +165,7 @@ const Astar = () => {
   }
 
   const start = () => {
-    console.log('here');
+    //console.log('here');
 
     var queue = new PriorityQueue({ comparator: (a, b) => { return a[1] - b[1] } });
     var gval = { 0: 0 };
@@ -260,10 +174,6 @@ const Astar = () => {
     var found = false;
     var visiting = {};
 
-
-
-    //setVisited([]); doesnt work. why?
-    //visited = []
 
     queue.queue([startNode, 0])
 
@@ -275,30 +185,18 @@ const Astar = () => {
       var neighbours = getNeighbours(node)
 
 
-      var [x, y] = getPos(node);
-      //visit(node);
-      // visiting.push(node)
-      visiting[node] = 'visited';
+      visiting[node] = nodeStatusType.visited;
 
-      // console.log(node);
-
-      //console.log('visited', node)
       if (node === endNode) {
         found = true;
       } else {
 
         for (var neighbour of neighbours) {
-          //console.log(neighbour)
-
-          //if (!(neighbour in prev)) {
           if (!(neighbour in prev) || gval[neighbour] > gval[node] + 1) {
-            //if (neighbour in prev && neighbour in gval && gval[neighbour] < gval[node] + 1 ){
-
             gval[neighbour] = gval[node] + 1;
             prev[neighbour] = node;
-            //console.log('fval', gval[neighbour] , hval(neighbour))
 
-            switch (algo) {
+            switch (algoSelect) {
               case algosList[0]:
                 queue.queue([neighbour, hval(neighbour)])
                 break;
@@ -311,106 +209,95 @@ const Astar = () => {
               default:
                 alert('algo select');
             }
-            // queue.queue([neighbour, gval[neighbour] + (2 * hval(neighbour))])
-            // queue.queue([neighbour, gval[neighbour]])
-            // queue.queue([neighbour, hval(neighbour)])
-            //}
           }
-          // }
         }
 
       }
-      //found = true
-
-      //console.log('queue', queue)
 
     }
-
-    //setVisited([...visited, path ]);
-    //setVisited([...visited, ...visiting]);
-    //console.log('path', path, visited);
-    //setVisited([...visited, ...path])
-    // path.forEach(p => {
-    //   console.log('path', p)
-    //   visit(p)
-    // });
-
-    //setNodeStatus(visiting);
-
-    //setNodeStatus(prev => { return{...prev, [node]: "path"} });
-    // set final path
 
 
     var pp = visiting;
     if (found) {
       var p = endNode
-      pp[p] = 'path';
+      pp[p] = nodeStatusType.path;
       while (prev[p] !== startNode) {
         //pp.push(prev[p])
         //setNodeStatus(prev => { return{  ...prev,[  node ]: "path"} });
         p = prev[p];
-        pp[p] = 'path';
+        pp[p] = nodeStatusType.path;
       }
-      pp[startNode] = 'path';
+      pp[startNode] = nodeStatusType.path;
       //setPath(pp);
       //console.log('set path', nodeStatus)
     }
 
     setNodeStatus(prevNodes => {
-      console.log('set path', prevNodes)
+      //console.log('set path', prevNodes)
       return { ...prevNodes, ...pp }
     });
   }
 
   function displayAlgosButtons() {
-    var algosList = ['heuristic', 'dijkstra', 'astar']
+    //var algosList = ['heuristic', 'dijkstra', 'astar']
     return (
-      // <ButtonGroup variant="contained" size="large">
-      // </ButtonGroup>
-      <Grid container spacing={3}>
-        <Grid item >
-          <Button variant="contained" color={algo === algosList[0] ? 'secondary' : 'primary'} onClick={() => { setAlgo(algosList[0]) }}>
-            {algosList[0]}
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button variant="contained" color={algo === algosList[1] ? 'secondary' : 'primary'} onClick={() => { setAlgo(algosList[1]) }}>
-            {algosList[1]}
-          </Button>
-        </Grid>
-        <Grid item>
-          <Button variant="contained" color={algo === algosList[2] ? 'secondary' : 'primary'} onClick={() => { setAlgo(algosList[2]) }}>
-            {algosList[2]}
-          </Button>
-        </Grid>
-      </Grid>
+      <ButtonGroup variant="contained" size="large" sx={{ margin: 1 }} >
+        {algosList.map((algo, i) => {
+          return (
+            <Button
+              key={i}
+              color={algoSelect === algo ? 'secondary' : 'primary'}
+              onClick={() => { setAlgoSelect(algo) }}
+              /* startIcon={<ReplayIcon />} */
+              startIcon={<NavigationIcon />}
+            >
+              {algo}
+
+            </Button>
+          )
+        }
+        )}
+      </ButtonGroup>
     )
   }
 
   return (
-    <Grid container spacing={4}>
-      <Grid item >
-        {displayAlgosButtons()}
-      </Grid>
-      <Grid item xs={12}>
-        {displayGraph()}
+    <>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          {displayAlgosButtons()}
+          <ButtonGroup variant="contained" size="large" sx={{ margin: 1 }}>
+            <Button onClick={() => { reset() }} color={'error'} startIcon={<ReplayIcon />}>
+              reset
+            </Button>
+            <Button onClick={() => { start() }} color={'success'} endIcon={<SendIcon />}>
+              start
+            </Button>
+          </ButtonGroup>
+        </Grid>
+
+        {/* <Grid item xs={4}> */}
+        {/*   <ButtonGroup variant="contained" size="large" > */}
+        {/*     <Button variant="contained" onClick={() => { start() }} > */}
+        {/*       start */}
+        {/*     </Button> */}
+        {/*     <Button variant="contained" onClick={() => { reset() }} > */}
+        {/*       reset */}
+        {/*     </Button> */}
+        {/*   </ButtonGroup> */}
         {/* </Grid> */}
+
+        <Grid item xs={12}>
+          {displayGraph()}
+          {/* </Grid> */}
+        </Grid>
+
+      <span style={{backgroundImage: `url(${'./grandpa.png'})`}}>
+        </span>
+
+        <img alt="" src={"/grandpa.png"}/>
       </Grid>
-      <Grid item xs={1.5}>
-        <Button variant="contained" onClick={() => {
-          start()
-        }} >
-          start
-        </Button>
-      </Grid>
-      <Grid item >
-        <Button variant="contained" onClick={() => {
-          reset()
-        }} >
-          reset
-        </Button>
-      </Grid>
-    </Grid>
+    </>
   )
 }
 

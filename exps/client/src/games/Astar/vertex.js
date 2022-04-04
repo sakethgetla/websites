@@ -2,23 +2,40 @@ import React, { useState, useEffect } from "react";
 import { Box, ButtonGroup, Button } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { green, orange } from '@mui/material/colors';
+import { DirectionsRun } from '@mui/icons-material/'
 
+// const nodeStatusType = {
+//   alive: 'alive',
+//   visited: 'visited',
+//   dead: 'dead',
+//   path: 'path',
+//   startNode: 'startNode',
+//   endNode: 'endNode',
+// }
 
-const theme = createTheme({
-  breakpoints: {
-    values: {
-      mobile: 0,
-      tablet: 640,
-      laptop: 1024,
-      desktop: 1280,
-    },
-  },
-  palette: {
-    primary: {
-      main: orange[500],
-    },
-  },
-});
+const nodeStatusType = {
+  alive: 0,
+  visited: 1,
+  dead: 3,
+  path: 4,
+  startNode: 5,
+  endNode: 6,
+}
+// const theme = createTheme({
+//   breakpoints: {
+//     values: {
+//       mobile: 0,
+//       tablet: 640,
+//       laptop: 1024,
+//       desktop: 1280,
+//     },
+//   },
+//   palette: {
+//     primary: {
+//       main: orange[500],
+//     },
+//   },
+// });
 
 class Vertex extends React.Component {
   constructor(props) {
@@ -47,24 +64,24 @@ class Vertex extends React.Component {
   }
 
   render() {
-    console.log('vertex render')
+    // console.log('vertex render')
 
     var color = '';
 
     switch (this.props.type) {
-      case 'endNode':
+      case nodeStatusType.endNode:
         color = 'success';
         break;
-      case 'startNode':
+      case nodeStatusType.startNode:
         color = 'success';
         break;
-      case 'path':
+      case nodeStatusType.path:
         color = 'warning';
         break;
-      case 'visited':
+      case nodeStatusType.visited:
         color = 'primary';
         break;
-      case 'dead':
+      case nodeStatusType.dead:
         color = 'error';
         break;
       default:
@@ -81,36 +98,55 @@ class Vertex extends React.Component {
       // <Button variant="contained" sx={{ height: 50, width:10 }} color={color} onClick={() => this.props.onClicked(this.props.value)}>
       // <Button variant="contained"  size={'large'} fullWidth={true} color={color} onClick={() => this.props.onClicked(this.props.value)}>
 
-      // <Button variant="contained" sx={{ height: '100%', width:'100%' }} color={color} onClick={() => this.props.onClicked(this.props.value)}>
-      //      {/* + */}
-      //   {/* {this.props.value} */}
-      // </Button>
+      // <ThemeProvider theme={theme}>
+      // </ThemeProvider>
+      <>
+      <Button variant="contained"
+        sx={{
+          height: 0,
+          width: '100%',
+          paddingBottom: '100%',
+          /* margin: '5px', */
+          minWidth: 0,
+          minHeight: 0,
+          '&:hover': {
+            /* backgroundColor: 'primary.dark', */
+          }
+        }}
+        color={color}
+        /* startIcon={<DirectionsRun/>} */
+        onClick={() => this.props.onClicked(this.props.value)}>
 
-      <ThemeProvider theme={theme}>
-        <Box
-          color='primary'
-          sx={{
-            width: '90%',
-            height: 0,
-            paddingBottom:'90%',
-            /* minWidth: ' 100px', */
-            /* maxWidth: ' 1500px', */
-            borderStyle: 'solid',
-            overflow: 'scroll',
-            backgroundColor: 'primary.dark',
-            margin: '2px',
-            '&:hover': {
-              backgroundColor: 'primary.main',
-              opacity: [0.9, 0.8, 0.7],
-            },
-          }}
-          onClick={() => this.props.onClicked(this.props.value)}
-        >
-        </Box>
+        <DirectionsRun size="large" sx={{ width: '100%' }} />
+        {/*    + */}
+        {/* {this.props.value} */}
+      </Button>
+        </>
+      // <ThemeProvider theme={theme}>
+      //   <Box
+      //     color='primary'
+      //     sx={{
+      //       width: '90%',
+      //       height: 0,
+      //       paddingBottom:'90%',
+      //       /* minWidth: ' 100px', */
+      //       /* maxWidth: ' 1500px', */
+      //       borderStyle: 'solid',
+      //       overflow: 'scroll',
+      //       backgroundColor: 'primary.dark',
+      //       margin: '2px',
+      //       '&:hover': {
+      //         backgroundColor: 'primary.main',
+      //         opacity: [0.9, 0.8, 0.7],
+      //       },
+      //     }}
+      //     onClick={() => this.props.onClicked(this.props.value)}
+      //   >
+      //   </Box>
 
-      </ThemeProvider >
+      // </ThemeProvider >
     )
   }
 }
 
-export default Vertex;
+export { nodeStatusType, Vertex };
