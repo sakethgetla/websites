@@ -8,7 +8,8 @@ import {
 } from "react-router-dom";
 
 //import Astar from './Astar';
-import Astar from './games/Astar/Astar';
+import PathFinder from './games/oldPathFind/PathFind';
+ // import PathFinder from './games/PathFind';
 //import DisplayGraph from './old/displayGraph';
 import Scene from './games/AI/phy'
 import Home from './Home'
@@ -47,9 +48,9 @@ export default function App() {
                   </Button>
                 </Link>
 
-                <Link to="/astar">
+                <Link to="/pathFinder">
                   <Button variant="contained">
-                    astar
+                    Path finding
                   </Button>
                 </Link>
 
@@ -65,7 +66,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/users" element={<Users />} />
           <Route path="/" element={<Home />} />
-          <Route path="/astar" element={<Astar />} />
+          <Route path="/pathFinder" element={<PathFinder />} />
           <Route path="/scene" element={<Scene />} />
         </Routes>
       </div>

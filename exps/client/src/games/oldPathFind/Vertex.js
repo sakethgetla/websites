@@ -4,23 +4,23 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { green, orange } from '@mui/material/colors';
 import { DirectionsRun } from '@mui/icons-material/'
 
-// const nodeStatusType = {
-//   alive: 'alive',
-//   visited: 'visited',
-//   dead: 'dead',
-//   path: 'path',
-//   startNode: 'startNode',
-//   endNode: 'endNode',
-// }
-
 const nodeStatusType = {
-  alive: 0,
-  visited: 1,
-  dead: 3,
-  path: 4,
-  startNode: 5,
-  endNode: 6,
+  alive: 'alive',
+  visited: 'visited',
+  dead: 'dead',
+  path: 'path',
+  startNode: 'startNode',
+  endNode: 'endNode',
 }
+
+// const nodeStatusType = {
+//   alive: 0,
+//   visited: 1,
+//   dead: 3,
+//   path: 4,
+//   startNode: 5,
+//   endNode: 6,
+// }
 // const theme = createTheme({
 //   breakpoints: {
 //     values: {
@@ -50,10 +50,15 @@ class Vertex extends React.Component {
     //   neighbours: []
     // }
     this.state = {
-      visited: false
+      status: props.type
     }
   }
-  handleClick() {
+  toggleStatus() {
+    if (this.state.status === nodeStatusType.alive) {
+      this.setState({ status: nodeStatusType.dead });
+    } else if (this.state.status === nodeStatusType.dead) {
+      this.setState({ status: nodeStatusType.alive });
+    }
     // this.setState({ visited: true })
     // this.setState({ location: -1 })
     //console.log('vertex clicked')
@@ -64,11 +69,12 @@ class Vertex extends React.Component {
   }
 
   render() {
-    // console.log('vertex render')
+    // console.log('vertex render ', this.props.type)
+    console.log('vertex render');
 
     var color = '';
 
-    switch (this.props.type) {
+    switch (this.state.status) {
       case nodeStatusType.endNode:
         color = 'success';
         break;
@@ -101,27 +107,31 @@ class Vertex extends React.Component {
       // <ThemeProvider theme={theme}>
       // </ThemeProvider>
       <>
-      <Button variant="contained"
-        sx={{
-          height: 0,
-          width: '100%',
-          paddingBottom: '100%',
-          /* margin: '5px', */
-          minWidth: 0,
-          minHeight: 0,
-          '&:hover': {
-            /* backgroundColor: 'primary.dark', */
-          }
-        }}
-        color={color}
-        /* startIcon={<DirectionsRun/>} */
-        onClick={() => this.props.onClicked(this.props.value)}>
+        <Button variant="contained"
+          sx={{
+            height: 0,
+            width: '100%',
+            paddingBottom: '100%',
+            /* margin: '5px', */
+            minWidth: 0,
+            borderRadius: 0,
+            minHeight: 0,
+            '&:hover': {
+              /* backgroundColor: 'primary.dark', */
+            }
+          }}
+          color={color}
+          /* startIcon={<DirectionsRun/>} */
+          onClick={() => {
+            this.toggleStatus();
+            this.props.onClicked(this.props.value)
+          }}>
 
-        <DirectionsRun size="large" sx={{ width: '100%' }} />
-        {/*    + */}
-        {/* {this.props.value} */}
-      </Button>
-        </>
+          {/* <DirectionsRun size="large" sx={{ width: '100%' }} /> */}
+          {/*    + */}
+          {/* {this.props.value} */}
+        </Button>
+      </>
       // <ThemeProvider theme={theme}>
       //   <Box
       //     color='primary'
