@@ -19,29 +19,40 @@ var algosList = ['heuristic', 'dijkstra', 'astar'];
 //var startNode = 0;
 //var endNode = (numNodes ** 2) - 1;
 //
-class PathFind extends React.Component {
+class PathFinder extends React.Component {
 
   constructor(props) {
     super(props);
     console.log(props)
 
-    this.state = {
-      numNodes: 10,
-      algoSelect: 'astar',
-      nodeStatus: {},
-      endNode: 10**2,
-      startNode: 0,
+    const numNodes = 20
+
+    var n = {};
+    for (var i = 0; i < numNodes**2; ++i) {
+      n[i] = nodeStatusType.alive;
     }
+    n[0] = nodeStatusType.startNode;
+    n[-1 + (numNodes**2)] = nodeStatusType.endNode;
+
+    this.state = {
+      numNodes: numNodes,
+      algoSelect: 'astar',
+      nodeStatus: n,
+      endNode: (numNodes**2) -1 ,
+      startNode: 0,
+      update: false,
+    }
+    //this.reset();
   }
 
 
-    // state = {
-    //   numNodes: 10,
-    //   algoSelect: 'astar',
-    //   nodeStatus: {},
-    //   endNode: 10**2,
-    //   startNode: 0,
-    // }
+  // state = {
+  //   numNodes: 10,
+  //   algoSelect: 'astar',
+  //   nodeStatus: {},
+  //   endNode: 10**2,
+  //   startNode: 0,
+  // }
 
 
   isVisited(node) {
@@ -77,17 +88,27 @@ class PathFind extends React.Component {
 
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate')
+    return this.state.algoSelect !== nextState.algoSelect || nextState.nodeStatus[nextState.startNode] !== this.state.nodeStatus[this.state.startNode]
+  }
+
+  componentDidMount() {
+
+    //this.reset();
+  }
   makeDead(node) {
-    //console.log("nodes", nodeStatus);
-    if (this.state.nodeStatus[node] === nodeStatusType.dead) {
-      //console.log("revive", node);
+    //console.log("nodes", node, this.state);
+    if (this.isDead(node)) {
+      console.log("revive", node);
       // setNodeStatus(prev => { return { ...prev, [node]: nodeStatusType.alive } });
-      this.setState((oldState) => {return  {...oldState.nodeStatus, [node]: nodeStatusType.alive} });
+      this.setState((oldState) => { return { nodeStatus: { ...oldState.nodeStatus, [node]: nodeStatusType.alive } } });
 
     } else {
-      //console.log("kill", node);
-      this.setState((oldState) => {return  {...oldState.nodeStatus, [node]: nodeStatusType.dead} });
-      //setNodeStatus(prev => { return { ...prev, [node]: nodeStatusType.dead } });
+      console.log("kill", node);
+      // setNodeStatus(prev => { return { ...prev, [node]: nodeStatusType.dead } });
+      this.setState((oldState) => { return { nodeStatus: { ...oldState.nodeStatus, [node]: nodeStatusType.dead } } });
+      // this.setState((oldState) => {return  {...oldState.nodeStatus, [node]: nodeStatusType.dead} });
     }
 
   }
@@ -100,8 +121,8 @@ class PathFind extends React.Component {
     n[0] = nodeStatusType.startNode;
     n[-1 + (this.state.numNodes ** 2)] = nodeStatusType.endNode;
     //setNodeStatus(n);
-    this.setState({nodeStatus: [n]});
-    //console.log('reset', n)
+    this.setState({ nodeStatus: n, findPath: false });
+    console.log('reset', n)
   }
 
 
@@ -144,7 +165,7 @@ class PathFind extends React.Component {
                 <Vertex
                   key={(j * this.state.numNodes) + i + Date.now()}
                   type={this.state.nodeStatus[(j * this.state.numNodes) + i]}
-                  onClicked={this.makeDead}
+                  onClicked={(n) => this.makeDead(n)}
                   value={(j * this.state.numNodes) + i}
                 />
 
@@ -258,8 +279,10 @@ class PathFind extends React.Component {
       }
       pp[this.state.startNode] = nodeStatusType.path;
       //setPath(pp);
-      //console.log('set path', nodeStatus)
+      //console.log('pp path', pp)
     }
+
+    this.setState((oldState) => { return { nodeStatus: { ...oldState.nodeStatus, ...pp }, findPath: true } });
 
     // setNodeStatus(prevNodes => {
     //   //console.log('set path', prevNodes)
@@ -276,7 +299,7 @@ class PathFind extends React.Component {
             <Button
               key={i}
               color={this.state.algoSelect === algo ? 'secondary' : 'primary'}
-              onClick={() => { this.setState({algoSelect: [algo]}) }}
+              onClick={() => { this.setState({ algoSelect: algo}) }}
               /* startIcon={<ReplayIcon />} */
               startIcon={<NavigationIcon />}
             >
@@ -321,23 +344,29 @@ class PathFind extends React.Component {
             {this.displayGraph()}
             {/* </Grid> */}
           </Grid>
-          {Array.apply(0, Array(this.state.numNodes)).map((x, i) => (
-            // <Grid item sx={{ height: 100, width: 100 }} >
-            <Grid item xs={1} key={i + Date.now()} >
-              <Vertex
-                key={i + Date.now()}
-                type={this.state.nodeStatus[i]}
-                /* onClicked={()=>console.log('button Clicked')} */
-                value={i}
-              />
+          {/* {Array.apply(0, Array(this.state.numNodes)).map((x, i) => ( */}
+          {/*   // <Grid item sx={{ height: 100, width: 100 }} > */}
+          {/*   <Grid item xs={1} key={i + Date.now()} > */}
+          {/*     <Vertex */}
+          {/*       key={i + Date.now()} */}
+          {/*       type={this.state.nodeStatus[i]} */}
+          {/*       /\* onClicked={()=>console.log('button Clicked')} *\/ */}
+          {/*       value={i} */}
+          {/*     /> */}
 
-            </Grid>
-          ))}
+          {/*   </Grid> */}
+          {/* ))} */}
 
           {/* <span style={{ backgroundImage: `url(${'./grandpa.png'})` }}> */}
           {/* </span> */}
           {/* <img alt="" src={"/grandpa.png"} /> */}
         </Grid>
+        <Button onClick={() => {
+          this.setState({ findPath: true })
+          console.log(this.state)
+        }}>
+          show state
+        </Button>
       </>
     )
 
@@ -346,4 +375,4 @@ class PathFind extends React.Component {
 }
 
 
-export default PathFind;
+export default PathFinder;
