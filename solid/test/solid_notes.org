@@ -1,0 +1,16 @@
+#+title: Solid Notes
+
+Building blocks
+ 1. Components
+ 2. Reactive Primites
+
+
+** Components
+functions that take props object and return JSX elements.
+
+light wight
+
+** Reactive Primites
+*** Siginal
+*** Memos
+*** Effects
