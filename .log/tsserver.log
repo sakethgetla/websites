@@ -1,19 +1,140 @@
-Info 0    [19:31:18.144] Starting TS Server
-Info 1    [19:31:18.144] Version: 4.2.4
-Info 2    [19:31:18.144] Arguments: /usr/bin/node /usr/bin/tsserver --logFile /home/dawes/docs/websites/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/233b1c23c0650304edcffe55ac194501/tscancellation*
-Info 3    [19:31:18.144] Platform: linux NodeVersion: 16 CaseSensitive: true
-Info 4    [19:31:18.144] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
-Info 5    [19:31:18.163] Search path: /home/dawes/docs/websites/old/final_website/server
-Info 6    [19:31:18.164] For info: /home/dawes/docs/websites/old/final_website/server/server.js :: No config files found.
-Info 7    [19:31:18.168] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
-Info 8    [19:31:21.209] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true Elapsed: 3040.1676420001313ms
-Info 9    [19:31:21.209] Project '/dev/null/inferredProject1*' (Inferred)
-Info 10   [19:31:21.209] 	Files (142)
+Info 0    [15:27:42.188] Starting TS Server
+Info 1    [15:27:42.188] Version: 4.6.4
+Info 2    [15:27:42.188] Arguments: /usr/bin/node /home/dawes/doc/websites/solid/test/my-app/node_modules/typescript/lib/tsserver.js --logFile /home/dawes/doc/websites/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/488c66a4875d2f4340f535665e17367e/tscancellation*
+Info 3    [15:27:42.188] Platform: linux NodeVersion: 18 CaseSensitive: true
+Info 4    [15:27:42.188] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
+Info 5    [15:27:42.209] Format host information updated
+Info 6    [15:27:42.219] Search path: /home/dawes/doc/websites/solid/test/my-app/src
+Info 7    [15:27:42.221] For info: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx :: Config file name: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 8    [15:27:42.221] Creating configuration project /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 9    [15:27:42.250] Config: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json : {
+ "rootNames": [
+  "/home/dawes/doc/websites/solid/test/my-app/vite.config.ts",
+  "/home/dawes/doc/websites/solid/test/my-app/src/App.tsx",
+  "/home/dawes/doc/websites/solid/test/my-app/src/index.tsx"
+ ],
+ "options": {
+  "strict": true,
+  "target": 99,
+  "module": 99,
+  "moduleResolution": 2,
+  "allowSyntheticDefaultImports": true,
+  "esModuleInterop": true,
+  "jsx": 1,
+  "jsxImportSource": "solid-js",
+  "types": [
+   "vite/client"
+  ],
+  "noEmit": true,
+  "isolatedModules": true,
+  "configFilePath": "/home/dawes/doc/websites/solid/test/my-app/tsconfig.json"
+ }
+}
+Info 10   [15:27:42.417] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 11   [15:27:44.161] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 1743.2627839995548ms
+Info 12   [15:27:44.162] Project '/home/dawes/doc/websites/solid/test/my-app/tsconfig.json' (Configured)
+Info 13   [15:27:44.162] 	Files (462)
 
-Info 11   [19:31:21.209] -----------------------------------------------
-Info 12   [19:31:21.261] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject1*
-Info 13   [19:31:21.299] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject1* Version: 1 structureChanged: true Elapsed: 37.74778399989009ms
-Info 14   [19:31:21.299] Project '/dev/null/autoImportProviderProject1*' (AutoImportProvider)
-Info 15   [19:31:21.299] 	Files (9)
+Info 14   [15:27:44.162] -----------------------------------------------
+Info 15   [15:27:44.170] AutoImportProviderProject: found 1 root files in 1 dependencies in 5.017742000520229 ms
+Info 16   [15:27:44.171] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject1*
+Info 17   [15:27:44.882] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject1* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 710.7733119996265ms
+Info 18   [15:27:44.882] Project '/dev/null/autoImportProviderProject1*' (AutoImportProvider)
+Info 19   [15:27:44.882] 	Files (678)
 
-Info 16   [19:31:21.299] -----------------------------------------------
+Info 20   [15:27:44.882] -----------------------------------------------
+Info 21   [15:34:49.087] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 22   [15:34:49.088] Elapsed:: 1.1512929992750287ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 23   [15:34:49.339] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 24   [15:34:49.356] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 2 structureChanged: false structureIsReused:: Completely Elapsed: 16.371088000014424ms
+Info 25   [15:34:49.356] Different program with same set of files
+Info 26   [15:35:49.107] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 27   [15:35:49.107] Elapsed:: 0.2341129994019866ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 28   [15:35:49.358] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 29   [15:35:49.373] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 3 structureChanged: false structureIsReused:: Completely Elapsed: 15.05967599991709ms
+Info 30   [15:35:49.373] Different program with same set of files
+Info 31   [15:36:31.130] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 32   [15:36:31.131] Elapsed:: 0.2829720005393028ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 33   [15:36:31.382] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 34   [15:36:31.393] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 4 structureChanged: false structureIsReused:: Completely Elapsed: 11.323313999921083ms
+Info 35   [15:36:31.393] Different program with same set of files
+Info 36   [15:51:19.543] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 37   [15:51:19.543] Elapsed:: 0.08361800014972687ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 38   [15:51:19.794] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 39   [15:51:19.828] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 5 structureChanged: false structureIsReused:: Completely Elapsed: 33.4201349997893ms
+Info 40   [15:51:19.828] Different program with same set of files
+Info 41   [15:51:35.552] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 42   [15:51:35.552] Elapsed:: 0.15495700016617775ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 43   [15:51:35.803] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 44   [15:51:35.844] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 6 structureChanged: false structureIsReused:: Completely Elapsed: 40.63563700020313ms
+Info 45   [15:51:35.844] Different program with same set of files
+Info 46   [15:51:49.559] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 47   [15:51:49.560] Elapsed:: 0.28232899960130453ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 48   [15:51:49.809] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 49   [15:51:49.843] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 7 structureChanged: false structureIsReused:: Completely Elapsed: 33.30294399987906ms
+Info 50   [15:51:49.843] Different program with same set of files
+Info 51   [15:53:59.620] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 52   [15:53:59.621] Elapsed:: 0.40333500038832426ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 53   [15:53:59.872] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 54   [15:53:59.905] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 8 structureChanged: false structureIsReused:: Completely Elapsed: 33.51436899974942ms
+Info 55   [15:53:59.906] Different program with same set of files
+Info 56   [15:54:27.635] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 57   [15:54:27.635] Elapsed:: 0.2653630003333092ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 58   [15:54:27.885] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 59   [15:54:27.913] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 9 structureChanged: false structureIsReused:: Completely Elapsed: 27.45532299950719ms
+Info 60   [15:54:27.913] Different program with same set of files
+Info 61   [15:54:47.643] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 62   [15:54:47.644] Elapsed:: 0.9785850001499057ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 63   [15:54:47.895] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 64   [15:54:47.911] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 10 structureChanged: false structureIsReused:: Completely Elapsed: 15.43807000014931ms
+Info 65   [15:54:47.911] Different program with same set of files
+Info 66   [15:55:19.657] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 67   [15:55:19.658] Elapsed:: 0.29290000069886446ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 68   [15:55:19.909] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 69   [15:55:19.952] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 11 structureChanged: false structureIsReused:: Completely Elapsed: 42.628357000648975ms
+Info 70   [15:55:19.952] Different program with same set of files
+Info 71   [15:55:29.662] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 72   [15:55:29.663] Elapsed:: 0.21981600020080805ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 73   [15:55:29.914] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 74   [15:55:29.955] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 12 structureChanged: false structureIsReused:: Completely Elapsed: 40.53102499991655ms
+Info 75   [15:55:29.955] Different program with same set of files
+Info 76   [15:55:45.674] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 77   [15:55:45.674] Elapsed:: 0.21819399949163198ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 78   [15:55:45.925] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 79   [15:55:45.936] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 13 structureChanged: false structureIsReused:: Completely Elapsed: 10.988079999573529ms
+Info 80   [15:55:45.936] Different program with same set of files
+Info 81   [16:27:50.501] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 82   [16:27:50.502] Elapsed:: 0.201452000066638ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 83   [16:27:50.752] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 84   [16:27:50.792] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 14 structureChanged: false structureIsReused:: Completely Elapsed: 39.50054999999702ms
+Info 85   [16:27:50.792] Different program with same set of files
+Info 86   [16:28:48.521] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 87   [16:28:48.521] Elapsed:: 0.1497489996254444ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 88   [16:28:48.772] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 89   [16:28:48.807] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 15 structureChanged: false structureIsReused:: Completely Elapsed: 33.79866699967533ms
+Info 90   [16:28:48.807] Different program with same set of files
+Info 91   [16:31:04.563] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 92   [16:31:04.563] Elapsed:: 0.5560500007122755ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 93   [16:31:04.814] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 94   [16:31:04.828] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 16 structureChanged: false structureIsReused:: Completely Elapsed: 13.451620999723673ms
+Info 95   [16:31:04.828] Different program with same set of files
+Info 96   [16:31:36.580] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 97   [16:31:36.580] Elapsed:: 0.3016499988734722ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 98   [16:31:36.830] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 99   [16:31:36.870] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 17 structureChanged: false structureIsReused:: Completely Elapsed: 38.73797100037336ms
+Info 100  [16:31:36.870] Different program with same set of files
+Info 101  [16:32:02.596] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 102  [16:32:02.596] Elapsed:: 0.13467499986290932ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 103  [16:32:02.847] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 104  [16:32:02.889] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 18 structureChanged: false structureIsReused:: Completely Elapsed: 41.25464500114322ms
+Info 105  [16:32:02.889] Different program with same set of files
+Info 106  [16:32:26.604] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 107  [16:32:26.604] Elapsed:: 0.05921899899840355ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 108  [16:32:26.855] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 109  [16:32:26.895] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 19 structureChanged: false structureIsReused:: Completely Elapsed: 39.584628999233246ms
+Info 110  [16:32:26.895] Different program with same set of files
+Info 111  [16:32:40.608] FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 112  [16:32:40.608] Elapsed:: 0.054822999984025955ms FileWatcher:: Triggered with /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 1:: WatchInfo: /home/dawes/doc/websites/solid/test/my-app/src/App.tsx 500 undefined WatchType: Closed Script info
+Info 113  [16:32:40.858] Starting updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json
+Info 114  [16:32:40.869] Finishing updateGraphWorker: Project: /home/dawes/doc/websites/solid/test/my-app/tsconfig.json Version: 20 structureChanged: false structureIsReused:: Completely Elapsed: 11.34048399887979ms
+Info 115  [16:32:40.869] Different program with same set of files

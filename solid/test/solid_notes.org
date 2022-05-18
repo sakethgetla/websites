@@ -7,10 +7,22 @@ Building blocks
 
 ** Components
 functions that take props object and return JSX elements.
+return only 1 jsx element.
+
 
 light wight
 
 ** Reactive Primites
+together they form auto-tracking sync engine (whats that?)
 *** Siginal
-*** Memos
+conerstone of reactivity.
+when it is changed solid automatically updates everything that uses it.
+
+*derivied signals:*
+functions that act like signals because they call a signal inside them.
+
 *** Effects
+observers that run when a signal variable changes.
+
+*** Memos
+cache values to save time, make it more efficient.
