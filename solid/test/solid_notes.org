@@ -17,12 +17,25 @@ together they form auto-tracking sync engine (whats that?)
 *** Siginal
 conerstone of reactivity.
 when it is changed solid automatically updates everything that uses it.
+#+begin_src js
+
+import { createSignal, createEffect, createMemo } from 'solid-js';
+const [getCount, setCount] = creteSignal(0);
+
+#+end_src
 
 *derivied signals:*
 functions that act like signals because they call a signal inside them.
 
 *** Effects
 observers that run when a signal variable changes.
+#+begin_src js
+
+import { createSignal, createEffect, createMemo } from 'solid-js';
+createEffect(() => {
+  // run code everytime a signal changes
+})
+#+end_src
 
 *** Memos
 cache values to save time, make it more efficient.
