@@ -4,7 +4,7 @@ import { createSignal, createEffect, createMemo } from 'solid-js';
 import Button from "@suid/material/Button";
 import Stack from "@suid/material/Stack";
 
-import PathFinder from "./PathFinder";
+import {PathFinder} from "./PathFinder";
 
 
 
