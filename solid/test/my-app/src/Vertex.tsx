@@ -2,7 +2,7 @@
 import type { Component } from 'solid-js';
 import { createSignal, createEffect, createMemo } from 'solid-js';
 import Button from "@suid/material/Button";
-import {nodeStatusType} from "./PathFinder";
+import { nodeStatusType } from "./PathFinder";
 
 // const nodeStatusType = {
 //   alive: 'secondary',
@@ -21,10 +21,11 @@ const Vertex: Component = (props) => {
 
     if (getColor() == nodeStatusType.alive) {
       setColor(nodeStatusType.dead);
+      props.updateNodes(props.key, nodeStatusType.dead);
     } else if (getColor() == nodeStatusType.dead) {
       setColor(nodeStatusType.alive);
+      props.updateNodes(props.key, nodeStatusType.alive);
     }
-    props.updateNodes(props.key, getColor());
   }
   return (
 

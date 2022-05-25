@@ -46,18 +46,60 @@ const PathFinder: Component = () => {
     )
   })
 
- // console.log(dist([1, 2], [4, 6]));
+  function inGraph(pos) {
+    return pos[0] >= 0 && pos[0] < gridWidth && pos[1] >= 0 && pos[1] < gridWidth
+  }
+  function isDead(node) {
+    return nodes[node].status === nodeStatusType.dead;
+  }
+
+  function posToNode(pos) {
+    return (pos[1] * gridWidth) + pos[0];
+  }
+
+  function nodeToPos(node) {
+    return [node % gridWidth, Math.floor(node / gridWidth)];
+  }
+
+  function getNeighbours(node) {
+    var neighbours = [];
+    // var neighbour = [];
+    var pos = nodeToPos(node);
+    [[0, -1], [-1, 0], [1, 0], [0, 1]].map(([i, j]) => {
+      var neighbour = [];
+      neighbour = [pos[0] + i, pos[1] + j];
+      if ((i !== 0 || j !== 0) && inGraph(neighbour) && !isDead(posToNode(neighbour))) {
+        neighbours.push(posToNode(neighbour));
+      }
+    });
+
+    return neighbours;
+  }
+
+
+
+  // console.log(dist([1, 2], [4, 6]));
   //dist([1, 2], [4, 6])
   function findPath() {
 
-    while (false){
+    function hValue(node1) {
+      return dist(nodeToPos(startNode), nodeToPos(endNode))
+    }
+
+    // [priority, value]
+    var queue = new PriorityQueue({ comparator: function(a, b) { return b[0] - a[0] } });
+
+
+    queue.queue([hValue(startNode), startNode]);
+
+    while (false) {
 
     }
   }
 
+  // console.log('neighbours 8:', getNeighbours(8))
   function renderNodes() {
     return (
-
       <>
         <SimpleGrid columns={gridWidth}>
           {nodes.map((node) => (
@@ -74,6 +116,10 @@ const PathFinder: Component = () => {
     <>
 
       {renderNodes()}
+
+      <button onClick={() => console.log('findpath', findPath())}>
+        h
+      </button>
     </>
   )
 }
