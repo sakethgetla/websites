@@ -1,6 +1,7 @@
 import type { Component } from 'solid-js';
 import { createSignal, createEffect, createMemo } from 'solid-js';
 import Button from "@suid/material/Button";
+import Stack from "@suid/material/Stack";
 //import Grid from "@suid/material/Grid";
 
 // import Grid from "./Grid";
@@ -17,29 +18,43 @@ const nodeStatusType = {
   endNode: 'success',
 }
 
+enum Algos {
+  dijkstra = 'Dijkstra',
+  astar = 'Astar',
+  huristic = 'Huristic'
+}
+
 
 const PathFinder: Component = () => {
 
   const [found, setFound] = createSignal(false);
+  const [algo, setAlgo] = createSignal(Algos.astar);
 
   let nodes: { id: number, status: string, hval: number, gval: number }[] = [];
   const gridWidth = 10;
   const startNode = 0;
   const endNode = (gridWidth ** 2) - 1;
 
-  for (let i = 0; i < gridWidth ** 2; i++) {
-    nodes.push({ "id": i, "status": nodeStatusType.alive });
-  }
-  nodes[startNode].status = nodeStatusType.startNode;
-  nodes[endNode].status = nodeStatusType.endNode;
 
+  function reset() {
+    console.log('reset')
+    nodes = [];
+    for (let i = 0; i < gridWidth ** 2; i++) {
+      nodes.push({ "id": i, "status": nodeStatusType.alive });
+    }
+    nodes[startNode].status = nodeStatusType.startNode;
+    nodes[endNode].status = nodeStatusType.endNode;
+    setFound(false);
+  }
+
+  reset();
 
   function updateNodes(id, status) {
-    console.log("update Nodes", id, status);
+    // console.log("update Nodes", id, status);
 
     nodes[id].status = status;
     // console.log("clicked", node.id)
-    console.log(nodes)
+    // console.log(nodes)
   }
 
   const dist = ((n1, n2) => {
@@ -102,10 +117,26 @@ const PathFinder: Component = () => {
 
     function fVal(node, gVal) {
       // console.log(hVal(node) + gVal[node]);
-      console.log('here', hVal(node), gVal[node], node);
+      // console.log('here', hVal(node), gVal[node], node);
       // return hVal(node);
       // return (1*hVal(node)) + gVal[node];
-      return (2*hVal(node)) + gVal[node];
+      switch (algo()) {
+        case Algos.dijkstra: {
+          return gVal[node];
+          break;
+        }
+        case Algos.huristic: {
+          return hVal(node);
+          break;
+        }
+        case Algos.astar: {
+          return (2 * hVal(node)) + gVal[node];
+          break;
+        }
+        default: {
+          return null;
+        }
+      }
     }
 
     queue.queue([hVal(startNode), startNode]);
@@ -141,7 +172,7 @@ const PathFinder: Component = () => {
       while (currNode != startNode) {
         nodes[currNode].status = nodeStatusType.path;
         currNode = prev[currNode];
-        console.log('found');
+        // console.log('found');
       }
 
       // console.log('found');
@@ -149,8 +180,8 @@ const PathFinder: Component = () => {
       nodes[endNode].status = nodeStatusType.endNode;
       setFound(true);
     }
-    console.log(nodes);
-    console.log(visited.length);
+    // console.log(nodes);
+    // console.log(visited.length);
 
   }
 
@@ -161,11 +192,12 @@ const PathFinder: Component = () => {
         {found()}
         <SimpleGrid columns={gridWidth}>
           {nodes.map((node) => (
+
             found() ?
-              <Vertex id={node.id} key={node.id + 1000} variant="contained" color={node.status} updateNodes={updateNodes} >
+              <Vertex id={node.id} variant="contained" color={node.status} updateNodes={updateNodes} >
                 {node.id}
               </Vertex> :
-              <Vertex id={node.id} key={node.id} variant="contained" color={nodeStatusType.alive} updateNodes={updateNodes} >
+              <Vertex id={node.id} variant="contained" color={node.status} updateNodes={updateNodes} >
                 {node.id}
               </Vertex>
 
@@ -179,12 +211,32 @@ const PathFinder: Component = () => {
 
   return (
     <>
+      <Stack spacing={2} direction="column">
+        <Stack spacing={2} direction="row">
+          <Button variant="contained" onClick={() => setAlgo(Algos.dijkstra)}>
+            {Algos.dijkstra}
+          </Button>
 
-      <Button variant="contained" onClick={findPath}>
-        find Path
-      </Button>
+          <Button variant="contained" onClick={() => setAlgo(Algos.astar)}>
+            {Algos.astar}
+          </Button>
 
-      {renderNodes()}
+          <Button variant="contained" onClick={() => setAlgo(Algos.huristic)}>
+            {Algos.huristic}
+          </Button>
+        </Stack>
+
+        <Stack spacing={2} direction="row">
+          <Button variant="contained" onClick={findPath}>
+            find Path
+          </Button>
+
+          <Button variant="contained" onClick={reset}>
+            reset
+          </Button>
+        </Stack>
+        {renderNodes()}
+      </Stack>
     </>
   )
 }

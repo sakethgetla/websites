@@ -57,23 +57,23 @@ const App: Component = () => {
     // <ButtonGroup>
     // iers
     <div>
-      {getCount()}
-      <Stack spacing={2} direction="row">
-        <Button variant="contained" color="error" onClick={() => {setCount(9)}}>
-          reset
-        </Button>
-        <Button variant="contained" onClick={() => { doubleCount() }}>
-          double count
-        </Button>
-        <Button variant="contained" onClick={() => { testCount() }}>
-          double test count
-        </Button>
-      </Stack>
-      <div>1. fib = {fib()} {fib()} {fib()} {fib()} {fib()}</div>
-      <div>2. oldfib = {oldfib()} {oldfib()} {oldfib()} {oldfib()} {oldfib()}</div>
+      {/* {getCount()} */}
+      {/* <Stack spacing={2} direction="row"> */}
+      {/*   <Button variant="contained" color="error" onClick={() => {setCount(9)}}> */}
+      {/*     reset */}
+      {/*   </Button> */}
+      {/*   <Button variant="contained" onClick={() => { doubleCount() }}> */}
+      {/*     double count */}
+      {/*   </Button> */}
+      {/*   <Button variant="contained" onClick={() => { testCount() }}> */}
+      {/*     double test count */}
+      {/*   </Button> */}
+      {/* </Stack> */}
+      {/* <div>1. fib = {fib()} {fib()} {fib()} {fib()} {fib()}</div> */}
+      {/* <div>2. oldfib = {oldfib()} {oldfib()} {oldfib()} {oldfib()} {oldfib()}</div> */}
 
-      <div>double Count: {getCount()}</div>
-      <div>test Count: {test}</div>
+      {/* <div>double Count: {getCount()}</div> */}
+      {/* <div>test Count: {test}</div> */}
       <PathFinder/>
     </div>
 

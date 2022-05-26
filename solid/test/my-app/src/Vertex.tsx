@@ -21,10 +21,10 @@ const Vertex: Component = (props) => {
 
     if (getColor() == nodeStatusType.alive) {
       setColor(nodeStatusType.dead);
-      props.updateNodes(props.key, nodeStatusType.dead);
+      props.updateNodes(props.id, nodeStatusType.dead);
     } else if (getColor() == nodeStatusType.dead) {
       setColor(nodeStatusType.alive);
-      props.updateNodes(props.key, nodeStatusType.alive);
+      props.updateNodes(props.id, nodeStatusType.alive);
     }
   }
   return (
