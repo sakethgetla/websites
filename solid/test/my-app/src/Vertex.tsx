@@ -16,7 +16,7 @@ import { nodeStatusType } from "./PathFinder";
 const Vertex: Component = (props) => {
 
   const [getColor, setColor] = createSignal(props.color)
-  // console.log(props)
+  console.log(props.color);
   function handleClick() {
 
     if (getColor() == nodeStatusType.alive) {
