@@ -31,7 +31,7 @@ const PathFinder: Component = () => {
   const [algo, setAlgo] = createSignal(Algos.astar);
 
   let nodes: { id: number, status: string, hval: number, gval: number }[] = [];
-  const gridWidth = 10;
+  const gridWidth = 15;
   const startNode = 0;
   const endNode = (gridWidth ** 2) - 1;
 
@@ -213,15 +213,15 @@ const PathFinder: Component = () => {
     <>
       <Stack spacing={2} direction="column">
         <Stack spacing={2} direction="row">
-          <Button variant="contained" onClick={() => setAlgo(Algos.dijkstra)}>
+          <Button variant="contained" color={algo() === Algos.dijkstra ? 'secondary' : 'primary'} onClick={() => setAlgo(Algos.dijkstra)}>
             {Algos.dijkstra}
           </Button>
 
-          <Button variant="contained" onClick={() => setAlgo(Algos.astar)}>
+          <Button variant="contained" color={algo() === Algos.astar ? 'secondary' : 'primary'} onClick={() => setAlgo(Algos.astar)}>
             {Algos.astar}
           </Button>
 
-          <Button variant="contained" onClick={() => setAlgo(Algos.huristic)}>
+          <Button variant="contained" color={algo() === Algos.huristic ? 'secondary' : 'primary'} onClick={() => setAlgo(Algos.huristic)}>
             {Algos.huristic}
           </Button>
         </Stack>
