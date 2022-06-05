@@ -62,16 +62,16 @@ export default function Astar() {
     x++;
 
     requestAnimationFrame(render)
-  //Binding the click event on the canvas
-  canvas.addEventListener('click', function(evt) {
-    var mousePos = getMousePos(canvas, evt);
+    //Binding the click event on the canvas
+    canvas.addEventListener('click', function(evt) {
+      var mousePos = getMousePos(canvas, evt);
 
-    if (isInside(mousePos, rect)) {
-      alert('clicked inside rect');
-    } else {
-      alert('clicked outside rect');
-    }
-  }, false);
+      if (isInside(mousePos, rect)) {
+        alert('clicked inside rect');
+      } else {
+        alert('clicked outside rect');
+      }
+    }, false);
   };
 
   useEffect(() => {
@@ -80,16 +80,16 @@ export default function Astar() {
   }, []);
 
   return <div>
-  <canvas
-    id="canvas"
-    ref={canvasRef}
-    height="500px"
-    width="800px"
-    style={{
-      backgroundColor: "#134959",
-      border: "1px solid #d3d3d3"
-    }}
-  />
-           <Astar3/>
-         </div>
+    <canvas
+      id="canvas"
+      ref={canvasRef}
+      height="500px"
+      width="800px"
+      style={{
+        backgroundColor: "#134959",
+        border: "1px solid #d3d3d3"
+      }}
+    />
+    <Astar3 />
+  </div>
 }
