@@ -1,4 +1,5 @@
 import type { Component } from 'solid-js';
+// import type { Vec2  as Vec2Type } from 'planck';
 import { onCleanup, onMount } from 'solid-js';
 import * as planck from 'planck';
 import { Vec2 } from 'planck';
@@ -59,61 +60,51 @@ const App: Component = () => {
   let lastTime: number = 0;
   const FPS: number = 60;
   const ratio: number = 10;
-  let circlePos: [number, number] = [1.0, 1.0];
-  let radius: numbe = 1.0;
+  let circlePos: [number, number] = [10.0, 20.0];
+  let radius: number = 1.0;
   let frameSize: [number, number] = [50.0, 50.0];
+  // let ball: {body: anyType, vel: Vec2, pos: Vec2} ;
+  let balls: [any] = [];
 
 
   // const gravity = planck.Vec2(0.0, 50.0);
 
-  const world = new planck.World(planck.Vec2(0, 20));
-  // const world = new planck.World({
-  //   gravity: gravity,
-  // })
+  const world = new planck.World(planck.Vec2(0, 0));
 
-  // Define a body with position, damping, etc.
+  // const groundBody = world.createBody();
 
-  // const groundBodyDef = {
-  //   position: planck.Vec2(0.0, -10.0)
-  // };
+  // create borders
+  world.createBody().createFixture(planck.Edge(Vec2(0, frameSize[1]), Vec2(frameSize[0], frameSize[1])))
+  world.createBody().createFixture(planck.Edge(Vec2(frameSize[0], 0), Vec2(frameSize[0], frameSize[1])))
+  world.createBody().createFixture(planck.Edge(Vec2(0, 0), Vec2(0, frameSize[1])))
+  world.createBody().createFixture(planck.Edge(Vec2(0, 0), Vec2(frameSize[0], 0)))
 
-  // Use the world object to create the body.
-  // const groundBody = world.createBody(groundBodyDef);
-  const groundBody = world.createBody();
-
-  groundBody.createFixture(planck.Edge(Vec2(-40, 50), Vec2(40, 50)))
   // Define fixtures with a shape, friction, density, etc.
-  // const groundBox = planck.Box(frameSize[0], frameSize[1]);
-  // const groundBox = planck.Box(frameSize[0] /2, frameSize[1] /2);
 
   // Create fixtures on the body.
-  // groundBody.createFixture(planck.Edge(planck.Vec2(-40.0, 0.0), planck.Vec2(40.0, 0.0)));
-  // groundBody.createFixture(groundBox, 0.0);
 
   //create the dynamic body (moving / non static)
-  // const body = world.createBody({
-  //   type: "dynamic",
-  //   position: planck.Vec2(circlePos[0], circlePos[1])
-  // });
 
+  function createBall(toWorld) {
+    const body = toWorld.createDynamicBody(Vec2(radius + ((frameSize[0] - radius - radius) * Math.random()), radius + ((frameSize[1] - radius - radius) * Math.random())))
 
-  const body = world.createDynamicBody(planck.Vec2(circlePos[0], circlePos[1]))
+    const dynamicCircle = planck.Circle(radius);
 
-  // const dynamicBox = planck.Box(1.0, 1.0);
-  // const dynamicBox = planck.Box(boxSize[0] /2, boxSize[1] /2);
-  const dynamicCircle = planck.Circle(radius);
+    body.createFixture(dynamicCircle, {
+      density: 1,
+      friction: 0,
+      restitution: 1
+    });
 
-  // const fictureDef = {
-  //   shape: dynamicBox,
-  //   density: 1.0,
-  //   // friction: 0.1,
-  //   restitution: 0.9
-  // }
+    body.setLinearVelocity(Vec2(10 * Math.random(), 10 * Math.random()))
+    return body
+  }
 
-  body.createFixture(dynamicCircle, {
-    density: 1,
-    restitution: 0.5
-  });
+  for (let i = 0; i < 10; i++) {
+    balls.push(createBall(world));
+
+  }
+
   // done initalization, next simulation.
 
   // simulation
@@ -126,33 +117,36 @@ const App: Component = () => {
 
   const draw = (time: number) => {
     const ctx = canvasRef?.getContext("2d") ?? null;
-
     // ctx.fillstyle = "green";
+
     // console.log('here')
     if (ctx) {
-      ctx.fillstyle = "#028888";
+      // ctx.fillstyle = "#028888";
       x = x === FPS ? 0 : x;
       if (time > lastTime + (1000 / FPS)) {
         //
         // clear screen
         ctx.clearRect(0, 0, frameSize[0] * ratio, frameSize[1] * ratio);
-        ctx.beginPath();
+        // ctx.beginPath();
 
 
         world.step(timestep, velocityIterations, positionIterations);
 
-        circlePos = [body.getPosition().x, body.getPosition().y]
-        console.log(circlePos, body.getAngle());
-        // console.log(body.getPosition(), body.getAngle());
-        ctx.arc(circlePos[0] * ratio, circlePos[1] * ratio, radius * ratio, 0, 2 * Math.PI, false);
-        // ctx.stroke();
-        ctx.fill();
-        // ctx.fillRect(x, 10, 150, 100);
-        // ctx.arc(10 * ratio, 10 * ratio, radius * ratio, 0, 2 * Math.PI, true);
+        balls.forEach((ball) => {
+          ctx.beginPath();
+
+          circlePos = [ball.getPosition().x, ball.getPosition().y]
+          // console.log(circlePos, ball.getLinearVelocity());
+          // console.log(body.getPosition(), body.getAngle());
+          ctx.arc(circlePos[0] * ratio, circlePos[1] * ratio, radius * ratio, 0, 2 * Math.PI, false);
+
+          // ctx.stroke();
+          ctx.fill();
+        })
 
         frame = requestAnimationFrame(draw)
         x++;
-        console.log('frame:', frame, x);
+        // console.log('frame:', frame, x);
       }
     }
 
@@ -168,7 +162,7 @@ const App: Component = () => {
     <div>
       <canvas ref={canvasRef} width={frameSize[0] * ratio} height={frameSize[1] * ratio}
         style={{
-          backgroundColor: "#134959",
+          /* backgroundColor: "#134959", */
           border: "1px solid #d3d3d3"
         }}
       />
