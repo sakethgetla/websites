@@ -53,7 +53,7 @@ import { Vec2 } from 'planck';
 //   x.add(deltaX);
 // }
 
-const App: Component = () => {
+const App: Component = (props) => {
   let canvasRef: HTMLCanvasElement | undefined = undefined;
   let frame: number;
   let x: number = 0;
@@ -66,6 +66,11 @@ const App: Component = () => {
   // let ball: {body: anyType, vel: Vec2, pos: Vec2} ;
   let balls: [any] = [];
 
+  document.addEventListener('keydown', e => console.log(e))
+  // document.addEventListener('keyup', e => console.log(e))
+  // document.addEventListener('keypress', e => console.log(e))
+  // console.log(props)
+  // console.log(document)
 
   // const gravity = planck.Vec2(0.0, 50.0);
 
@@ -87,16 +92,20 @@ const App: Component = () => {
 
   function createBall(toWorld) {
     const body = toWorld.createDynamicBody(Vec2(radius + ((frameSize[0] - radius - radius) * Math.random()), radius + ((frameSize[1] - radius - radius) * Math.random())))
+    // const body = toWorld.createKinematicBody(Vec2(radius + ((frameSize[0] - radius - radius) * Math.random()), radius + ((frameSize[1] - radius - radius) * Math.random())))
 
     const dynamicCircle = planck.Circle(radius);
+
 
     body.createFixture(dynamicCircle, {
       density: 1,
       friction: 0,
+      filterGroupIndex: -1,
       restitution: 1
+
     });
 
-    body.setLinearVelocity(Vec2(10 * Math.random(), 10 * Math.random()))
+    body.setLinearVelocity(Vec2((20 * Math.random()) - 10, (20 * Math.random())-10 ))
     return body
   }
 
@@ -105,6 +114,7 @@ const App: Component = () => {
 
   }
 
+    // balls.push(createBall(world));
   // done initalization, next simulation.
 
   // simulation
