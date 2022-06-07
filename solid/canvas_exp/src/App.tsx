@@ -4,54 +4,6 @@ import { onCleanup, onMount } from 'solid-js';
 import * as planck from 'planck';
 import { Vec2 } from 'planck';
 
-// planck.testbed('VaryingRestitution', function(testbed) {
-//   var pl = planck, Vec2 = pl.Vec2;
-//   var world = new pl.World(Vec2(0, -10));
-
-//   var ground = world.createBody();
-//   ground.createFixture(pl.Edge(Vec2(-40.0, 0.0), Vec2(40.0, 0.0)));
-
-//   var restitution = [ 0.0, 0.1, 0.3, 0.5, 0.75, 0.9, 1.0 ];
-
-//   var circle = pl.Circle(1.0);
-
-//   for (var i = 0; i < restitution.length; ++i) {
-//     var ball = world.createDynamicBody(Vec2(-10.0 + 3.0 * i, 20.0));
-//     ball.createFixture(circle, {
-//       density: 1.0,
-//       restitution: restitution[i]
-//     });
-//   }
-
-//   return world;
-// });
-//
-// var pl = planck, Vec2 = pl.Vec2;
-// var world = new pl.World(Vec2(0, -10));
-
-// var COUNT = 20;
-
-// var ground = world.createBody();
-// ground.createFixture(pl.Edge(Vec2(-40.0, 0.0), Vec2(40.0, 0.0)), 0.0);
-
-// var a = 0.5;
-// var box = pl.Box(a, a);
-
-// var x = Vec2(-7.0, 0.75);
-// var y = Vec2();
-// var deltaX = Vec2(0.5625, 1.25);
-// var deltaY = Vec2(1.125, 0.0);
-
-// for (var i = 0; i < COUNT; ++i) {
-//   y.set(x);
-//   for (var j = i; j < COUNT; ++j) {
-
-//     world.createDynamicBody(y).createFixture(box, 5.0);
-
-//     y.add(deltaY);
-//   }
-//   x.add(deltaX);
-// }
 
 const App: Component = (props) => {
   let canvasRef: HTMLCanvasElement | undefined = undefined;
@@ -64,19 +16,17 @@ const App: Component = (props) => {
   let radius: number = 1.0;
   let frameSize: [number, number] = [50.0, 50.0];
   // let ball: {body: anyType, vel: Vec2, pos: Vec2} ;
-  let balls: [any] = [];
+  let balls: any = [];
+  let player: any = null;
+  let playerRadius: number = radius * 2;
 
-  document.addEventListener('keydown', e => console.log(e))
-  // document.addEventListener('keyup', e => console.log(e))
-  // document.addEventListener('keypress', e => console.log(e))
-  // console.log(props)
-  // console.log(document)
 
   // const gravity = planck.Vec2(0.0, 50.0);
 
   const world = new planck.World(planck.Vec2(0, 0));
 
   // const groundBody = world.createBody();
+
 
   // create borders
   world.createBody().createFixture(planck.Edge(Vec2(0, frameSize[1]), Vec2(frameSize[0], frameSize[1])))
@@ -85,36 +35,116 @@ const App: Component = (props) => {
   world.createBody().createFixture(planck.Edge(Vec2(0, 0), Vec2(frameSize[0], 0)))
 
   // Define fixtures with a shape, friction, density, etc.
-
   // Create fixtures on the body.
-
   //create the dynamic body (moving / non static)
 
-  function createBall(toWorld) {
-    const body = toWorld.createDynamicBody(Vec2(radius + ((frameSize[0] - radius - radius) * Math.random()), radius + ((frameSize[1] - radius - radius) * Math.random())))
+  function createBall(toWorld, userData) {
+    // const body = toWorld.createDynamicBody(Vec2(radius + ((frameSize[0] - radius - radius) * Math.random()), radius + ((frameSize[1] - radius - radius) * Math.random())))
     // const body = toWorld.createKinematicBody(Vec2(radius + ((frameSize[0] - radius - radius) * Math.random()), radius + ((frameSize[1] - radius - radius) * Math.random())))
+    const body = toWorld.createDynamicBody({
+      position: Vec2(radius + ((frameSize[0] - radius - radius) * Math.random()), radius + ((frameSize[1] - radius - radius) * Math.random())),
+      linearVelocity: Vec2((20 * Math.random()) - 10, (20 * Math.random()) - 10),
+      userData: userData
+    })
 
     const dynamicCircle = planck.Circle(radius);
-
 
     body.createFixture(dynamicCircle, {
       density: 1,
       friction: 0,
-      filterGroupIndex: -1,
+      filterGroupIndex: -1, // dont interact with each other.
       restitution: 1
-
     });
 
-    body.setLinearVelocity(Vec2((20 * Math.random()) - 10, (20 * Math.random())-10 ))
+    // body.setLinearVelocity(Vec2((20 * Math.random()) - 10, (20 * Math.random()) - 10))
+    // body.setUserData(i);
     return body
   }
 
-  for (let i = 0; i < 10; i++) {
-    balls.push(createBall(world));
+  function createSensor(toWorld) {
+    // const body = toWorld.createDynamicBody(Vec2(playerRadius + ((frameSize[0] - playerRadius - playerRadius) * Math.random()), playerRadius + ((frameSize[1] - playerRadius - playerRadius) * Math.random())))
+    // const body = toWorld.createKinematicBody(Vec2(radius + ((frameSize[0] - radius - radius) * Math.random()), radius + ((frameSize[1] - radius - radius) * Math.random())))
+    //
+    const body = toWorld.createDynamicBody({
+      position: Vec2(playerRadius + ((frameSize[0] - playerRadius - playerRadius) * Math.random()), playerRadius + ((frameSize[1] - playerRadius - playerRadius) * Math.random())),
+      linearDamping: 1,
+      userData: -1
+    })
 
+    const dynamicCircle = planck.Circle(playerRadius);
+
+    body.createFixture(dynamicCircle, {
+      density: 0,
+      friction: 0,
+      isSensor: true, // doesnt collide with other but still collects info.
+      restitution: 1
+    });
+
+    const dynamicCore = planck.Circle(playerRadius / 4);
+
+    body.createFixture(dynamicCore, {
+      density: 0,
+      friction: 0,
+      restitution: 0
+    });
+
+    // body.setLinearVelocity(Vec2((20 * Math.random()) - 10, (20 * Math.random()) - 10))
+    return body
   }
 
-    // balls.push(createBall(world));
+
+  // get collisions
+  world.on('begin-contact', contact => {
+    // console.log(contact.m_fixtureA.m_isSensor);
+    // console.log(contact.m_fixtureB.m_isSensor);
+    // console.log(contact['m_fixtureA']);
+    if (contact.m_fixtureB.m_isSensor && contact.m_fixtureA.m_body.m_type === 'dynamic') {
+
+    } else if (contact.m_fixtureA.m_isSensor && contact.m_fixtureB.m_body.m_type === 'dynamic') {
+      // console.log('contact');
+      // console.log(contact.m_fixtureB);
+      // balls[contact.m_fixtureB.m_body.userData].setPosition(radius + ((frameSize[0] - radius - radius) * Math.random()), radius + ((frameSize[1] - radius - radius) * Math.random()))
+    }
+  });
+
+  for (let i = 0; i < 10; i++) {
+    balls.push(createBall(world, i));
+  }
+
+
+  player = createSensor(world);
+  console.log(player)
+
+  document.addEventListener('keydown', e => {
+    // console.log(e)
+    switch (e.key) {
+      case "ArrowRight": {
+        // console.log("arrow right")
+        player.applyLinearImpulse(Vec2(10, 0), player.getPosition());
+        break;
+      }
+      case "ArrowLeft": {
+        // console.log("arrow left")
+        // player.applyForceToCenter(Vec2(-100, 0));
+        player.applyLinearImpulse(Vec2(-10, 0), player.getPosition());
+        break;
+      }
+      case "ArrowDown": {
+        // console.log("arrow down")
+        // player.applyForceToCenter(Vec2(0, 100));
+        player.applyLinearImpulse(Vec2(0, 10), player.getPosition());
+        break;
+      }
+      case "ArrowUp": {
+        // console.log("arrow up")
+        // player.applyForceToCenter(Vec2(0, -100));
+        player.applyLinearImpulse(Vec2(0, -10), player.getPosition());
+        break;
+      }
+    }
+  })
+
+  // balls.push(createBall(world));
   // done initalization, next simulation.
 
   // simulation
@@ -139,9 +169,32 @@ const App: Component = (props) => {
         ctx.clearRect(0, 0, frameSize[0] * ratio, frameSize[1] * ratio);
         // ctx.beginPath();
 
+        var contact = player.getContactList();
+        if (contact && contact.contact.m_fixtureA.m_body.m_type === 'dynamic' && contact.contact.m_fixtureB.m_body.m_type === 'dynamic') {
+            console.log(contact);
+          if (contact.contact.m_fixtureB.m_isSensor) {
+            // console.log('here');
+            // balls[contact.m_fixtureA.m_body.m_userData].setTransform(Vec2(0, 0), 0);
+            var bodynum = contact.contact.m_fixtureA.m_body.m_userData;
+            console.log('relocate', bodynum, balls[bodynum]);
+            // balls[bodynum].setActive(false);
+            balls[bodynum].setPosition(Vec2(10, 10));
+            // world.destroyBody(balls[bodynum]);
 
+
+          } else if (contact.contact.m_fixtureA.m_isSensor) {
+            // balls[contact.contact.m_fixtureB.m_body.m_userData].setTransform(Vec2(0, 0), 0);
+
+            // var bodynum = contact.contact.m_fixtureA.m_body.m_userData;
+            // console.log('relocate', bodynum, balls[bodynum]);
+          }
+
+        }
+
+        // run next step in simulation.
         world.step(timestep, velocityIterations, positionIterations);
 
+        // display balls
         balls.forEach((ball) => {
           ctx.beginPath();
 
@@ -153,6 +206,16 @@ const App: Component = (props) => {
           // ctx.stroke();
           ctx.fill();
         })
+
+
+        // display player
+        ctx.beginPath();
+        circlePos = [player.getPosition().x, player.getPosition().y]
+        ctx.arc(circlePos[0] * ratio, circlePos[1] * ratio, playerRadius * ratio, 0, 2 * Math.PI, false);
+        ctx.stroke();
+        // ctx.fill();
+
+
 
         frame = requestAnimationFrame(draw)
         x++;
