@@ -171,19 +171,21 @@ const App: Component = (props) => {
 
         var contact = player.getContactList();
         if (contact && contact.contact.m_fixtureA.m_body.m_type === 'dynamic' && contact.contact.m_fixtureB.m_body.m_type === 'dynamic') {
-            console.log(contact);
+            // console.log(contact);
           if (contact.contact.m_fixtureB.m_isSensor) {
             // console.log('here');
             // balls[contact.m_fixtureA.m_body.m_userData].setTransform(Vec2(0, 0), 0);
-            var bodynum = contact.contact.m_fixtureA.m_body.m_userData;
-            console.log('relocate', bodynum, balls[bodynum]);
+            // console.log('relocate', bodynum, balls[bodynum]);
             // balls[bodynum].setActive(false);
-            balls[bodynum].setPosition(Vec2(10, 10));
+            var bodynum = contact.contact.m_fixtureA.m_body.m_userData;
+            balls[bodynum].setPosition(Vec2(playerRadius + ((frameSize[0] - playerRadius - playerRadius) * Math.random()), playerRadius + ((frameSize[1] - playerRadius - playerRadius) * Math.random())));
             // world.destroyBody(balls[bodynum]);
 
 
           } else if (contact.contact.m_fixtureA.m_isSensor) {
             // balls[contact.contact.m_fixtureB.m_body.m_userData].setTransform(Vec2(0, 0), 0);
+            var bodynum = contact.contact.m_fixtureB.m_body.m_userData;
+            balls[bodynum].setPosition(Vec2(playerRadius + ((frameSize[0] - playerRadius - playerRadius) * Math.random()), playerRadius + ((frameSize[1] - playerRadius - playerRadius) * Math.random())));
 
             // var bodynum = contact.contact.m_fixtureA.m_body.m_userData;
             // console.log('relocate', bodynum, balls[bodynum]);
@@ -207,15 +209,12 @@ const App: Component = (props) => {
           ctx.fill();
         })
 
-
         // display player
         ctx.beginPath();
         circlePos = [player.getPosition().x, player.getPosition().y]
         ctx.arc(circlePos[0] * ratio, circlePos[1] * ratio, playerRadius * ratio, 0, 2 * Math.PI, false);
         ctx.stroke();
         // ctx.fill();
-
-
 
         frame = requestAnimationFrame(draw)
         x++;
