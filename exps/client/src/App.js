@@ -8,10 +8,11 @@ import {
 } from "react-router-dom";
 
 //import Astar from './Astar';
-import PathFinder from './games/oldPathFind/PathFind';
- // import PathFinder from './games/PathFind';
+// import PathFinder from './games/oldPathFind/PathFind';
+ import PathFinder from './games/PathFind/PathFind';
 //import DisplayGraph from './old/displayGraph';
-import Scene from './games/AI/phy'
+import Scene from './games/AI/phy';
+import Model from './games/AI/model';
 import Home from './Home'
 import { AppBar, ButtonGroup, Button } from '@mui/material';
 
@@ -84,5 +85,5 @@ function About() {
 }
 
 function Users() {
-  return <h2>Users</h2>;
+  return <Model/>
 }
