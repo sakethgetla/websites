@@ -51,12 +51,13 @@ const Model = () => {
     };
   }
 
-  var data = createTestData(500);
+  var data = createTestData(1);
   // console.log(data.labMin.dataSync())
   // console.log(data.inputs.dataSync())
   // console.log(data.labels.dataSync())
 
   async function trainModel(model, inputs, labels) {
+
     model.compile({
       optimizer: tf.train.adam(),
       loss: tf.losses.meanSquaredError,
@@ -66,22 +67,27 @@ const Model = () => {
     const batchSize = 32;
     const epochs = 30;
 
-    return await model.fit(inputs, labels, {
+    return await model.fit(tf.tensor2d(inputs, [inputs.length, this.inputShape]), tf.tensor2d(labels, [labels.length, this.outputShape]), {
       batchSize,
       epochs,
       shuffle: true,
-      callbacks: tfvis.show.fitCallbacks(
-        {name: 'Training perf'},
-        ['loss', 'mse'],
-        {height: 200, callbacks: ['onEpochEnd']}
-      )
+      // callbacks: tfvis.show.fitCallbacks(
+      //   {name: 'Training perf'},
+      //   ['loss', 'mse'],
+      //   {height: 200, callbacks: ['onEpochEnd']}
+      // )
     });
   }
 
 
   async function test() {
     var model = createModel();
-    await trainModel(model, data.inputs, data.labels);
+    // await trainModel(model, data.inputs, data.labels);
+
+    var outputs = model.predict(data.inputs)
+    console.log(data.inputs)
+    console.log(data.inputs.dataSync())
+    console.log(outputs.dataSync())
     console.log('done')
 
   }
