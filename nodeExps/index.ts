@@ -1,4 +1,5 @@
 import tf = require('@tensorflow/tfjs')
+import { isArray } from 'mathjs';
 
 // import { matrix, zeros } from 'mathjs'
 // import { Vec2 } from 'planck';
@@ -25,9 +26,27 @@ a.push(tf.tensor([1,2,3,5,6]))
 a.push(tf.tensor([1,2,3,5,6]))
 a.push(tf.tensor([1,2,3,5,6]))
 a.push(tf.tensor([1,2,3,5,6]))
+a.shift()
 
-console.log(a)
+// let b = a[0].arraySync();
+let c = a[1].dataSync();
 
+a.push( a[0].concat(a[1]) )
+a[3].print()
+// let b = tf.tensor2d(a, [5, 5]);
+// let b = tf.reshape(a, [5,5])
+let b = a[3].reshape([5,2])
+b.print()
+// console.log(b)
+// console.log(b.valueOf())
+// console.log(isArray(b))
+// console.log(isArray(c))
+// console.log(typeof c)
+
+// let b = tf.data.array(a);
+
+// b.forEachAsync(c => c.print());
+// b.batch()
 
 // let a = tf.tensor([[1, 1, 2, 2]])
 
