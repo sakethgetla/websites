@@ -13,7 +13,7 @@ import {
 //import DisplayGraph from './old/displayGraph';
 import Scene from './games/AI/phy';
 import Model from './games/AI/model';
-import Home from './Home'
+// import Home from './Home'
 import { AppBar, ButtonGroup, Button } from '@mui/material';
 
 export default function App() {
@@ -66,7 +66,7 @@ export default function App() {
         <Routes>
           <Route path="/about" element={<About />} />
           <Route path="/users" element={<Users />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Scene />} />
           <Route path="/pathFinder" element={<PathFinder />} />
           <Route path="/scene" element={<Scene />} />
         </Routes>

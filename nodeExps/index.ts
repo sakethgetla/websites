@@ -1,5 +1,5 @@
 import tf = require('@tensorflow/tfjs')
-import { isArray } from 'mathjs';
+import { isArray, add } from 'mathjs';
 
 // import { matrix, zeros } from 'mathjs'
 // import { Vec2 } from 'planck';
@@ -19,25 +19,62 @@ import { isArray } from 'mathjs';
 // a.push(2);
 // a.push(3);
 // a.push(4);
-// a.shift();
+// // a.shift();
 
-let a = [];
-a.push(tf.tensor([1,2,3,5,6]))
-a.push(tf.tensor([1,2,3,5,6]))
-a.push(tf.tensor([1,2,3,5,6]))
-a.push(tf.tensor([1,2,3,5,6]))
-a.shift()
+// console.log(Math.max(...a))
 
-// let b = a[0].arraySync();
-let c = a[1].dataSync();
+// console.log(add(a, 3));
 
-a.push( a[0].concat(a[1]) )
-a[3].print()
-// let b = tf.tensor2d(a, [5, 5]);
-// let b = tf.reshape(a, [5,5])
-let b = a[3].reshape([5,2])
-b.print()
-// console.log(b)
+
+
+// if([ ...a.map(c => c>5 ? true : false) ]){
+//     console.log('works')
+// }else {
+
+//     console.log('not works')
+// }
+
+
+
+// let t = tf.tensor([1,2,3,5,6]);
+// let array = t.dataSync()
+// console.log(array);
+
+// console.log(array[0]);
+
+// a.push(tf.tensor([1,2,3,5,6]))
+// a.push(tf.tensor([1,2,3,5,6]))
+// a.push(tf.tensor([1,2,3,5,6]))
+// a.push(tf.tensor([1,2,3,5,6]))
+// a.shift()
+
+// // let b = a[0].arraySync();
+// let c = a[1].dataSync();
+
+// a.push( a[0].concat(a[1]) )
+// a[3].print()
+// // let b = tf.tensor2d(a, [5, 5]);
+// // let b = tf.reshape(a, [5,5])
+// let b = a[3].reshape([5,2])
+// b.print()
+// b.max().print()
+// a[3].max().print()
+
+
+
+// var a = tf.data.array([1, 2, 3, 4, 5, 6]);
+// var b = a.take(2);
+
+// async function f() {
+
+//     await a.forEachAsync(e => console.log(e));
+//     console.log('')
+//     await b.forEachAsync(e => console.log(e));
+// }
+
+// f();
+
+// console.log(b.max())
 // console.log(b.valueOf())
 // console.log(isArray(b))
 // console.log(isArray(c))
@@ -83,7 +120,8 @@ b.print()
 
 // var a = Vec2(-1, -2);
 
-// console.log(a)
+// console.log(Array(3).fill(Array(2).fill(0)))
+console.log(Array(3).fill(0).map(()=> Math.random()))
 
 // var norm = a.clone().add(Vec2(1,1))
 // console.log(norm, a )
