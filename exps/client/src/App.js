@@ -16,9 +16,13 @@ import Model from './games/AI/model';
 // import Home from './Home'
 import { AppBar, ButtonGroup, Button } from '@mui/material';
 
+
+import soildersImg from './images/soilders.jpg';
+
 export default function App() {
   return (
     <Router>
+      hello
       <div>
         <nav>
           <ul>

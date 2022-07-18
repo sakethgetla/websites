@@ -1,12 +1,20 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
+import '@tensorflow/tfjs-backend-cpu';
 // import logo from './logo.svg';
 // import './App.css';
 // import { mobilenet } from '@tensorflow-models/mobilenet';
-import mobilenet from '@tensorflow-models/mobilenet';
+// import mobilenet from '@tensorflow-models/mobilenet';
+const mobilenet = require('@tensorflow-models/mobilenet');
 // import  {MobileNet}  from '@tensorflow-models/mobilenet';
 // import mobilenet  from '@tensorflow-models/mobilenet/dist/index/';
-// import img from './images/image001.png';
-import { useState, useEffect } from 'react';
+// import img from '../src/images/image001.png';
+// import soildersImg from "../src/images/image001.png";
+// import soildersImg from "../public/images/soilders.jpg";
+// import soildersImg from './images/image001.png';
+// import soildersImg from "./images/soilders.jpg";
+// import soildersImg from './src/images/soilders.jpg';
+// import l = require('./images/soilders.jpg');
 
 
 function App() {
@@ -14,8 +22,8 @@ function App() {
   // useEffect(async () => {
   useEffect(() => {
     // const model = await mobilenet.load();
-    mobilenet.load().then((model)=> {
-
+    mobilenet.load().then(() => {
+      console.log('here: ');
     });
     // var out = await model.classify(img);
 
@@ -23,12 +31,14 @@ function App() {
     //   console.log(out);
     // });
 
-  })
+  }, []);
 
   return (
     <div>
       hello
+      <img src="images/soilders.jpg" alt="ietra" />
     </div>
+
   );
 }
 
