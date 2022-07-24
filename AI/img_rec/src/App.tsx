@@ -8,7 +8,8 @@ import * as tf from '@tensorflow/tfjs';
 // import './App.css';
 // import { mobilenet } from '@tensorflow-models/mobilenet';
 // import mobilenet from '@tensorflow-models/mobilenet';
-const mobilenet = require('@tensorflow-models/mobilenet');
+// const mobilenet = require('@tensorflow-models/mobilenet');
+const mobilenet = require('@tensorflow-models/coco-ssd');
 // import  {MobileNet}  from '@tensorflow-models/mobilenet';
 // import mobilenet  from '@tensorflow-models/mobilenet/dist/index/';
 // import img from '../src/images/image001.png';
@@ -34,9 +35,12 @@ function App() {
       console.log(a.shape);
       mobilenet.load().then((model) => {
         console.log('here: ');
-        model.classify(a).then((out) => {
+        model.detect(a).then((out) => {
           console.log(out);
-        });
+        })
+          // model.classify(a).then((out) => {
+        //   console.log(out);
+        // });
       });
     }
 
