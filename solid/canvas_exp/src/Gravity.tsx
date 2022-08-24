@@ -30,6 +30,8 @@ const Gravity: Component = (props) => {
       ctx.rect(40+x, 40, 80, 90);
       ctx.fill();
       x++;
+
+
     }
 
     frame = requestAnimationFrame(draw)

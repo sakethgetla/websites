@@ -2,6 +2,7 @@
 import { render } from 'solid-js/web';
 
 // import App from './App';
-import Gravity from './Gravity';
+// import Gravity from './Gravity';
+import BirdFloking from './BirdFlocking';
 
-render(() => <Gravity />, document.getElementById('root') as HTMLElement);
+render(() => <BirdFloking />, document.getElementById('root') as HTMLElement);

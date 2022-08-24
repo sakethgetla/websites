@@ -171,7 +171,7 @@ const App: Component = (props) => {
 
         var contact = player.getContactList();
         if (contact && contact.contact.m_fixtureA.m_body.m_type === 'dynamic' && contact.contact.m_fixtureB.m_body.m_type === 'dynamic') {
-            // console.log(contact);
+          // console.log(contact);
           if (contact.contact.m_fixtureB.m_isSensor) {
             // console.log('here');
             // balls[contact.m_fixtureA.m_body.m_userData].setTransform(Vec2(0, 0), 0);
