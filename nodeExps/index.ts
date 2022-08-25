@@ -1,8 +1,93 @@
-import tf = require('@tensorflow/tfjs')
-import { isArray, add } from 'mathjs';
+// import tf = require('@tensorflow/tfjs')
+// import { isArray, add } from 'mathjs';
 
-// import { matrix, zeros } from 'mathjs'
+// import { matrix, zeros, multiply, dotMultiply } from 'mathjs'
+import * as math from 'mathjs';
+// import math from 'mathjs'
 // import { Vec2 } from 'planck';
+
+// let a = [1,2,3,4,5];
+// let b = [1,2,3,4,5];
+
+// let am = math.matrix(a);
+// let bm = math.matrix(b);
+// // b.resize([ 5,1 ]);
+
+// console.log(a);
+// console.log(b);
+// const c = math.dotMultiply(b, a);
+// const cm = math.dotMultiply(bm, am);
+// // let c = a * b;
+
+// console.log(c);
+// console.log(cm);
+// // console.log(cm.subset(math.index(0)));
+// console.log(math.add(am, cm));
+// console.log(math.add(am, bm));
+// console.log(am.get([ 1 ]));
+
+
+// let d = math.matrix([a, b]);
+
+
+// // d.resize([5,2])
+// d = math.transpose(d);
+// d.forEach(v => {
+//     console.log(v)
+// })
+
+// console.log(d);
+// // console.log(d.get([ 1 ]));
+// console.log(math.multiply(d, math.matrix([ [1],[2] ])));
+
+// console.log(math.multiply( math.matrix([1,2]), math.transpose(d)));
+// console.log(math.multiply(d, math.matrix([ 1, 2 ])));
+// console.log(math.multiply( math.transpose(d), math.matrix([1,1,1,1,1])));
+// let v = math.matrix([[ 1,1 ]]);
+// let d = math.random([5, 2]);
+let d = math.matrix(math.ones([5, 2]));
+// let v = math.ones([1, 2]);
+let v = math.matrix(math.ones([5]));
+// console.log(d);
+// console.log(v);
+// console.log(math.transpose(v));
+// console.log(math.multiply( d, v ));
+// console.log(math.multiply( d, v ));
+// console.log(math.multiply( math.transpose(d), v ));
+v = math.matrix(math.ones(2, 1));
+console.log(d);
+console.log(v);
+console.log(math.transpose(d));
+
+console.log(math.add( d, v ));
+console.log(math.add( d, math.transpose(v) ));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// console.log(math.add( math.transpose(d), v ));
+// console.log(d.map(a => math.add(a, v)));
+
+// console.log(math.multiply( math.transpose(d), math.transpose(v) ));
+
+// console.log(math.multiply( math.matrix([[ 1 ], [ 2 ]]), d));
+
+
+// console.log(math.random(math.matrix( [ 5 ] )));
+// console.log(math.random( math.matrix([2]), 10 ));
+
+
 
 
 // let data: Array<Array<number>>;
@@ -121,7 +206,7 @@ import { isArray, add } from 'mathjs';
 // var a = Vec2(-1, -2);
 
 // console.log(Array(3).fill(Array(2).fill(0)))
-console.log(Array(3).fill(0).map(()=> Math.random()))
+// console.log(Array(3).fill(0).map(()=> Math.random()))
 
 // var norm = a.clone().add(Vec2(1,1))
 // console.log(norm, a )
