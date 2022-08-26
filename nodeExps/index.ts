@@ -2,7 +2,45 @@
 // import { isArray, add } from 'mathjs';
 
 // import { matrix, zeros, multiply, dotMultiply } from 'mathjs'
-import * as math from 'mathjs';
+// import * as math from 'mathjs';
+import '@tensorflow/tfjs-backend-cpu';
+import * as tf from '@tensorflow/tfjs-core';
+
+
+
+
+
+
+
+
+let a = tf.ones([3, 2]);
+let b = tf.tensor([[ 2, 3 ]]);
+let c = tf.add(a, b);
+// let d = tf.
+a.print();
+b.print();
+tf.transpose(b).print()
+c.print();
+tf.transpose(c).print()
+
+// tf.matMul(tf.transpose(c), tf.ones([[  c.shape[0]  ]]));
+tf.matMul(tf.transpose(c), tf.ones([3, 1])).print();
+tf.sum(c, 0).print();
+
+// tf.matMul(a, tf.transpose(b)).print();
+// tf.dot(a, b).print();
+
+
+
+tf.diag(tf.ones([5])).print();
+
+
+
+
+
+
+
+
 // import math from 'mathjs'
 // import { Vec2 } from 'planck';
 
@@ -45,22 +83,33 @@ import * as math from 'mathjs';
 // console.log(math.multiply( math.transpose(d), math.matrix([1,1,1,1,1])));
 // let v = math.matrix([[ 1,1 ]]);
 // let d = math.random([5, 2]);
-let d = math.matrix(math.ones([5, 2]));
+// let d = math.matrix(math.ones([5, 2]));
 // let v = math.ones([1, 2]);
-let v = math.matrix(math.ones([5]));
+// let v = math.matrix(math.ones([5]));
 // console.log(d);
 // console.log(v);
 // console.log(math.transpose(v));
 // console.log(math.multiply( d, v ));
 // console.log(math.multiply( d, v ));
 // console.log(math.multiply( math.transpose(d), v ));
-v = math.matrix(math.ones(2, 1));
-console.log(d);
-console.log(v);
-console.log(math.transpose(d));
+// v = math.matrix(math.ones(2, 1));
+// v = math.matrix([[ 2 ], [ 1 ]]);
+// console.log(d);
+// console.log(v);
 
-console.log(math.add( d, v ));
-console.log(math.add( d, math.transpose(v) ));
+// console.log(math.ones(d.size()));
+// console.log(math.identity(2));
+// console.log(math.multiply( math.identity(2), v));
+// console.log(math.multiply( math.identity(2), math.matrix([[ 2 ], [ 1 ]]) ));
+
+// console.log(math.multiply(math.ones(d.size()), v) );
+// console.log(math.add(d, math.multiply(math.ones(d.size()), v) ));
+
+
+// console.log(math.transpose(d));
+
+// console.log(math.add( d, v ));
+// console.log(math.add( d, math.transpose(v) ));
 
 
 

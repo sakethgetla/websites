@@ -19,7 +19,8 @@
     "typescript": "^4.7.3"
   },
   "dependencies": {
-    "@tensorflow/tfjs": "^3.18.0",
+    "@tensorflow/tfjs-backend-cpu": "^3.20.0",
+    "@tensorflow/tfjs-core": "^3.20.0",
     "mathjs": "^10.6.4",
     "planck": "^1.0.0-alpha.4"
   }
