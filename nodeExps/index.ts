@@ -10,29 +10,48 @@ import * as tf from '@tensorflow/tfjs-core';
 
 
 
-
-
-
-let a = tf.ones([3, 2]);
-let b = tf.tensor([[ 2, 3 ]]);
-let c = tf.add(a, b);
-// let d = tf.
+let b = tf.tensor3d([1,2,3,4,5,6,1,2,3,4,5,6], [1, 6, 2]);
+// let b = tf.tensor1d([1,2,3,4,5,6]);
+let a = tf.ones([6, 6, 2]);
 a.print();
 b.print();
-tf.transpose(b).print()
-c.print();
-tf.transpose(c).print()
+let c;
+c = tf.matMul(a, tf.diag(tf.reshape( b, [-1] )));
+// c = tf.matMul(a, tf.diag(tf.squeeze( b )));
+// c.print();
 
-// tf.matMul(tf.transpose(c), tf.ones([[  c.shape[0]  ]]));
-tf.matMul(tf.transpose(c), tf.ones([3, 1])).print();
-tf.sum(c, 0).print();
+// // let d = tf.tensor2d([1,2,3,4,5,6], [6, 1]);
+// c = tf.sub(c, tf.transpose(b));
+// c.print();
 
-// tf.matMul(a, tf.transpose(b)).print();
-// tf.dot(a, b).print();
+// tf.diag(tf.squeeze(tf.tensor2d([1,2,3,4,5,6], [1, 6]))).print();
+
+// tf.tensor1d([1,2,3,4,5,6] ).print()
+// tf.transpose(tf.tensor1d([1,2,3,4,5,6] )).print()
+// tf.transpose(tf.tensor2d([1,2,3,4,5,6], [6, 1])).print()
+
+
+// let a = tf.ones([3, 2]);
+// let b = tf.tensor([[ 2, 3 ]]);
+// let c = tf.add(a, b);
+// // let d = tf.
+// a.print();
+// b.print();
+// tf.transpose(b).print()
+// c.print();
+// tf.transpose(c).print()
+
+// // tf.matMul(tf.transpose(c), tf.ones([[  c.shape[0]  ]]));
+// tf.matMul(tf.transpose(c), tf.ones([3, 1])).print();
+// tf.sum(c, 0).print();
+
+// // tf.matMul(a, tf.transpose(b)).print();
+// // tf.dot(a, b).print();
 
 
 
-tf.diag(tf.ones([5])).print();
+// tf.diag(tf.ones([5])).print();
+
 
 
 
