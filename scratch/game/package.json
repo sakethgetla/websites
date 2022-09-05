@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "web-dev-server --watch /app/index.html"
+    "start": "web-dev-server --watch /index.html"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +16,8 @@
     "typescript": "^4.8.2"
   },
   "dependencies": {
+    "@tensorflow/tfjs-backend-cpu": "^3.20.0",
+    "@tensorflow/tfjs-core": "^3.20.0",
     "@web/dev-server": "^0.1.34"
   }
 }
