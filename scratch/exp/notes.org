@@ -1,0 +1,5 @@
+#+title: Notes
+
+HTTP hyper text transfer protocal
+not a programming language.
+j
