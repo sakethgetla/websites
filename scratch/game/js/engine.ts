@@ -8,14 +8,22 @@ var Engine = function(global) {
     canvas.height = 606;
     doc.body.appendChild(canvas);
     global.ctx = ctx;
-  console.log('here');
+    console.log('here');
 
 }
 
-window.onload = function () {
+window.onload = function() {
     // window.onload = Engine(this);
     Engine(this);
 }
 
 
-  console.log('here');
+console.log('here');
+
+
+let frame: number;
+frame = 4;
+
+console.log('here', frame);
+frame = 'aires';
+console.log('here', frame);
