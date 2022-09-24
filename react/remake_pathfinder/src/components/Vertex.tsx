@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import { styled } from '@mui/material/styles';
 
+import nodeStates from './helper'
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -15,7 +16,7 @@ import { styled } from '@mui/material/styles';
 // }));
 
 
-var styles = {
+var styles2 = {
   // width: 'auto',
   // height: '100px',
   height: 0,
@@ -27,15 +28,27 @@ var styles = {
     opacity: [0.9, 0.8, 0.7],
   },
 };
+var styles1 = {
+  // width: 'auto',
+  // height: '100px',
+  height: 0,
+  width: '100%',
+  paddingBottom: '100%',
+  backgroundColor: 'secondary.dark',
+  '&:hover': {
+    backgroundColor: 'secondary.main',
+    opacity: [0.9, 0.8, 0.7],
+  },
+};
 
-function Vertex({ handleClick }: any) {
-  console.log("vertex");
+function Vertex({ onClick, state }: any) {
+  // console.log("vertex");
   // console.log(handleClick);
   // compon
   return (
     <Box
-      onClick={() => handleClick()}
-      sx={styles}
+      onClick={() => onClick()}
+      sx={state === nodeStates.alive ? styles1 : styles2}
     />
   );
 }
